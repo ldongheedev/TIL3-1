@@ -1,0 +1,158 @@
+/* Created: 2026-03-23 12:05 */
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: #121212;
+  color: #f0f0f0;
+  font-family: 'Segoe UI', Helvetica, Arial, sans-serif;
+  min-height: 100vh;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 32px 16px;
+}
+
+.container {
+  width: 100%;
+  max-width: 360px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+h1 {
+  font-size: 1.3rem;
+  font-weight: 700;
+  text-align: center;
+  color: #ffffff;
+}
+
+.subtitle {
+  font-size: 0.9rem;
+  color: #aaaaaa;
+  text-align: center;
+}
+
+/* Drawing canvas */
+.canvas-wrapper {
+  border: 2px solid #4fc3f7;
+  border-radius: 6px;
+  line-height: 0;
+}
+
+#drawCanvas {
+  display: block;
+  background: #000;
+  cursor: crosshair;
+  touch-action: none;
+  border-radius: 4px;
+}
+
+/* Prediction result */
+.result {
+  font-size: 2.6rem;
+  font-weight: 700;
+  color: #4fc3f7;
+  letter-spacing: 0.05em;
+  min-height: 3rem;
+  text-align: center;
+}
+
+/* Confidence bars */
+.bars {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.bar-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 18px;
+}
+
+.bar-label {
+  width: 14px;
+  text-align: right;
+  font-size: 0.8rem;
+  color: #cccccc;
+  flex-shrink: 0;
+}
+
+.bar-track {
+  flex: 1;
+  height: 100%;
+  background: #2a2a2a;
+  border-radius: 3px;
+  overflow: hidden;
+  position: relative;
+}
+
+.bar-fill {
+  height: 100%;
+  width: 0%;
+  background: #555;
+  border-radius: 3px;
+  transition: width 0.25s ease;
+}
+
+.bar-fill.active {
+  background: #4fc3f7;
+}
+
+.bar-pct {
+  position: absolute;
+  right: 5px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.7rem;
+  color: #fff;
+}
+
+/* 28x28 preview */
+.preview-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.preview-label {
+  font-size: 0.78rem;
+  color: #888888;
+}
+
+#previewCanvas {
+  border: 1px solid #444;
+  background: #000;
+  border-radius: 3px;
+  image-rendering: pixelated;
+}
+
+/* Buttons */
+.buttons {
+  display: flex;
+  gap: 12px;
+}
+
+button {
+  padding: 10px 28px;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  background: #1565c0;
+  color: #fff;
+  transition: background 0.15s;
+}
+
+button:hover  { background: #1976d2; }
+button:active { background: #0d47a1; }
+
+button.secondary            { background: #424242; }
+button.secondary:hover      { background: #616161; }
+button.secondary:active     { background: #212121; }
