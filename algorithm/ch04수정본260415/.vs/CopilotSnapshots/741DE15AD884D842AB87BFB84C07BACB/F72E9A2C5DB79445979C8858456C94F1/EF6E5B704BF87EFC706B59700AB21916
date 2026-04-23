@@ -1,0 +1,97 @@
+﻿# 자료구조 과제 (연결 리스트) 작성 코드 정리
+
+## 1. 이중 연결 리스트 (ch04_4)
+특정 노드 앞에 노드를 삽입하는 기능(`insertBeforeNode`)과 이중 연결 리스트를 역순으로 뒤집는 기능(`reverseList`)을 구현했습니다.
+
+### `DoubleLinkedList.h` (헤더 파일)
+함수 선언 추가
+```c
+void insertBeforeNode(linkedList_h* DL, listNode* target, char* x);
+void reverseList(linkedList_h* DL);
+```
+
+### `DoubleLinkedList.c` (구현 파일)
+함수 정의 추가
+```c
+void insertBeforeNode(linkedList_h* DL, listNode* target, char* x) {
+    listNode* newNode = (listNode*)malloc(sizeof(listNode));
+    strcpy(newNode->data, x);
+    newNode->llink = NULL;
+    newNode->rlink = NULL;
+
+    if (DL->head == NULL) {
+        DL->head = newNode;
+        return;
+    }
+
+    if (target == DL->head) {
+        newNode->rlink = target;
+        target->llink = newNode;
+        DL->head = newNode;
+    } else if (target != NULL) {
+        newNode->llink = target->llink;
+        newNode->rlink = target;
+        if (target->llink != NULL) {
+            target->llink->rlink = newNode;
+        }
+        target->llink = newNode;
+    }
+}
+
+void reverseList(linkedList_h* DL) {
+    listNode* p = DL->head;
+    listNode* temp = NULL;
+
+    while (p != NULL) {
+        temp = p->llink;
+        p->llink = p->rlink;
+        p->rlink = temp;
+
+        if (p->llink == NULL) {
+            DL->head = p;
+        }
+        p = p->llink;
+    }
+}
+```
+
+### `ex4_4.c` (메인 실행 파일)
+함수 테스트 호출 추가
+```c
+    printf("\n(4) 이중 연결 리스트의 [수] 노드 뒤에 [금] 노드 삽입하기! \n");
+    p = searchNode(DL, "수"); insertNode(DL, p, "금");
+    printList(DL); 
+
+    printf("\n(5) [수] 노드 앞에 [화] 삽입, [금] 노드 앞에 [목] 삽입하기! \n");
+    p = searchNode(DL, "수"); insertBeforeNode(DL, p, "화");
+    p = searchNode(DL, "금"); insertBeforeNode(DL, p, "목");
+    printList(DL);
+
+    printf("\n(6) 이중 연결 리스트 역순으로 재구성하기! \n");
+    reverseList(DL);
+    printList(DL); 
+
+    free(DL);
+```
+
+---
+
+## 2. 단순 연결 리스트 (ch04_1)
+`insertMiddleNode` 함수를 활용하여 리스트 중간에 "화"와 "목" 노드가 들어가도록 구현했습니다.
+
+### `ex4_1.c` (메인 실행 파일)
+함수 호출을 통해 중간 노드 "화", "목" 삽입
+```c
+    printf("\n(4) 리스트 첫 번째에 [월] 노드 삽입하기! \n");
+    insertFirstNode(L, "월");
+    printList(L);
+
+    printf("\n(5) [월] 노드 뒤에 [화] 삽입, [수] 노드 뒤에 [목] 삽입하기! \n");
+    insertMiddleNode(L, L->head, "화"); // 월 노드 뒤에 화 삽입
+    insertMiddleNode(L, L->head->link->link, "목"); // 화(link), 수(link->link) 뒤에 목 삽입
+    printList(L);
+
+    printf("\n(6) 리스트 공간을 해제하여 공백 리스트로 만들기! \n");
+    freeLinkedList_h(L);
+    printList(L);
+```
