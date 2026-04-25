@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>할 일 관리</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="container">
+    <header class="header">
+      <div class="header__top">
+        <h1 class="header__title">할 일 관리</h1>
+        <div class="header__actions">
+          <button id="export-btn" class="btn btn--action" title="JSON으로 내보내기">내보내기</button>
+          <label id="import-label" class="btn btn--action" title="JSON 가져오기">
+            가져오기
+            <input type="file" id="import-input" accept=".json" style="display:none">
+          </label>
+          <button id="theme-toggle" class="theme-toggle" aria-label="다크모드 전환">🌙</button>
+        </div>
+      </div>
+      <p class="header__date" id="today-date"></p>
+    </header>
+
+    <main class="main" id="main-content">
+
+      <!-- 진행률 대시보드 -->
+      <section class="dashboard" id="dashboard">
+        <div class="dashboard__summary">
+          <div class="dashboard__stat">
+            <span class="dashboard__stat-value" id="stat-total">0</span>
+            <span class="dashboard__stat-label">전체</span>
+          </div>
+          <div class="dashboard__stat">
+            <span class="dashboard__stat-value" id="stat-completed">0</span>
+            <span class="dashboard__stat-label">완료</span>
+          </div>
+          <div class="dashboard__stat">
+            <span class="dashboard__stat-value" id="stat-remaining">0</span>
+            <span class="dashboard__stat-label">남은 일</span>
+          </div>
+        </div>
+        <div class="progress-track">
+          <div class="progress-bar" id="progress-bar"></div>
+        </div>
+        <div class="dashboard__categories" id="dashboard-categories"></div>
+      </section>
+
+      <!-- 입력 폼 -->
+      <section class="form-card">
+        <input
+          type="text"
+          id="todo-input"
+          class="form__input"
+          placeholder="할 일을 입력하세요"
+          autocomplete="off"
+        >
+        <div class="form__row">
+          <select id="category-select" class="form__select"></select>
+          <select id="priority-select" class="form__select form__select--priority">
+            <option value="높음">🔴 높음</option>
+            <option value="보통" selected>🟡 보통</option>
+            <option value="낮음">🟢 낮음</option>
+          </select>
+        </div>
+        <div class="form__row">
+          <input type="datetime-local" id="due-input" class="form__input form__input--due">
+          <button id="add-btn" class="btn btn--primary">추가</button>
+        </div>
+      </section>
+
+      <!-- 뷰 토글 + 카테고리 필터 -->
+      <div class="toolbar">
+        <div class="view-toggle">
+          <button class="view-btn view-btn--active" id="view-list">목록</button>
+          <button class="view-btn" id="view-weekly">요일별</button>
+        </div>
+        <div class="filter-tabs" id="filter-tabs"></div>
+      </div>
+
+      <!-- 할 일 목록 -->
+      <section class="list-section" id="list-section">
+        <ul class="todo-list" id="todo-list"></ul>
+      </section>
+
+      <!-- 주간 뷰 -->
+      <section class="weekly-section" id="weekly-section" style="display:none">
+        <div class="weekly-nav">
+          <button class="btn btn--action" id="week-prev">← 이전 주</button>
+          <span class="weekly-nav__label" id="week-label"></span>
+          <button class="btn btn--action" id="week-next">다음 주 →</button>
+        </div>
+        <div class="weekly-days" id="weekly-days"></div>
+        <div class="weekly-detail" id="weekly-detail"></div>
+      </section>
+
+    </main>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
