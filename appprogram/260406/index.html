@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>상식 퀴즈 게임</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- ══════════════════════════════════════
+     SCREEN 1 — START
+══════════════════════════════════════ -->
+<div id="screen-start" class="screen">
+  <div class="container">
+    <h1 class="app-title">📝 상식 퀴즈</h1>
+    <p class="app-subtitle">한국사 · 과학 · 지리 · 일반상식</p>
+
+    <div class="nickname-wrap">
+      <label for="nickname-input">닉네임</label>
+      <input
+        id="nickname-input"
+        type="text"
+        placeholder="닉네임을 입력하세요"
+        maxlength="12"
+        autocomplete="off"
+      />
+      <span id="nickname-error" class="error-msg hidden">닉네임을 입력해 주세요.</span>
+    </div>
+
+    <p class="section-label">카테고리 선택</p>
+    <div class="category-grid">
+      <button class="category-btn" data-category="korean_history">📚 한국사</button>
+      <button class="category-btn" data-category="science">🔬 과학</button>
+      <button class="category-btn" data-category="geography">🌍 지리</button>
+      <button class="category-btn" data-category="general">💡 일반상식</button>
+    </div>
+
+    <hr class="divider" />
+    <button id="btn-leaderboard" class="btn-ghost">🏆 순위 보기</button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     SCREEN 2 — DIFFICULTY
+══════════════════════════════════════ -->
+<div id="screen-difficulty" class="screen hidden">
+  <div class="container">
+    <h2 id="difficulty-category-name"></h2>
+    <p class="section-label">난이도를 선택하세요</p>
+
+    <div class="difficulty-grid">
+      <button class="difficulty-btn" data-difficulty="easy">
+        <span class="diff-name">쉬움</span>
+        <span class="diff-desc">문제당 30초 · 정답 시 최대 10점</span>
+      </button>
+      <button class="difficulty-btn" data-difficulty="normal">
+        <span class="diff-name">보통</span>
+        <span class="diff-desc">문제당 20초 · 정답 시 최대 15점</span>
+      </button>
+      <button class="difficulty-btn" data-difficulty="hard">
+        <span class="diff-name">어려움</span>
+        <span class="diff-desc">문제당 15초 · 정답 시 최대 20점</span>
+      </button>
+    </div>
+
+    <button id="btn-back-to-start" class="btn-ghost">← 돌아가기</button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     SCREEN 3 — QUIZ
+══════════════════════════════════════ -->
+<div id="screen-quiz" class="screen hidden">
+  <div class="quiz-header">
+    <div class="quiz-info">
+      <span id="quiz-category-label"></span>
+      <span id="quiz-progress"></span>
+    </div>
+    <div class="quiz-stats">
+      <span id="quiz-score">0점</span>
+      <span id="quiz-combo" class="combo-display hidden"></span>
+    </div>
+  </div>
+
+  <div class="timer-bar-wrap">
+    <div class="timer-bar-track">
+      <div id="timer-bar"></div>
+    </div>
+  </div>
+
+  <div class="quiz-body">
+    <p id="quiz-question"></p>
+  </div>
+
+  <div class="options-grid" id="options-grid"></div>
+</div>
+
+<!-- ══════════════════════════════════════
+     SCREEN 4 — FEEDBACK
+══════════════════════════════════════ -->
+<div id="screen-feedback" class="screen hidden">
+  <div class="container">
+    <div id="feedback-result-banner" class="feedback-banner"></div>
+    <div id="feedback-combo-popup" class="hidden"></div>
+    <div id="feedback-score-info"></div>
+    <div id="feedback-options-list"></div>
+    <button id="btn-next-question" class="btn-primary">다음 문제 →</button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     SCREEN 5 — RESULT
+══════════════════════════════════════ -->
+<div id="screen-result" class="screen hidden">
+  <div class="container">
+    <h2>게임 종료!</h2>
+    <div id="result-grade" class="result-grade">-</div>
+
+    <div class="result-stats">
+      <div class="stat-item">
+        <span class="stat-label">점수</span>
+        <span class="stat-value" id="result-score">-</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-label">정답률</span>
+        <span class="stat-value" id="result-correct">-</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-label">최고 콤보</span>
+        <span class="stat-value" id="result-combo">-</span>
+      </div>
+    </div>
+
+    <p class="result-nickname" id="result-nickname"></p>
+    <p id="result-saved-msg" class="result-saved-msg hidden"></p>
+
+    <div class="result-actions">
+      <button id="btn-share"          class="btn-primary">결과 공유</button>
+      <button id="btn-to-leaderboard" class="btn-secondary">🏆 순위 보기</button>
+      <button id="btn-retry"          class="btn-secondary">↩ 다시 하기</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     SCREEN 6 — LEADERBOARD
+══════════════════════════════════════ -->
+<div id="screen-leaderboard" class="screen hidden">
+  <div class="container">
+    <h2>🏆 리더보드</h2>
+
+    <div class="lb-filters">
+      <div class="lb-filter-row" id="lb-category-tabs"></div>
+      <div class="lb-filter-row" id="lb-difficulty-tabs"></div>
+    </div>
+
+    <table id="lb-table">
+      <thead>
+        <tr>
+          <th>순위</th>
+          <th>닉네임</th>
+          <th>점수</th>
+          <th>등급</th>
+          <th>정답률</th>
+          <th>콤보</th>
+          <th>날짜</th>
+        </tr>
+      </thead>
+      <tbody id="lb-tbody"></tbody>
+    </table>
+
+    <button id="btn-back-from-lb" class="btn-ghost">← 돌아가기</button>
+  </div>
+</div>
+
+<script type="module" src="js/main.js"></script>
+</body>
+</html>

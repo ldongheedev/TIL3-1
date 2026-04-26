@@ -1,0 +1,19 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(find C:/Users/403_29/.claude/plugins -name *.json)",
+      "Bash(find C:/Users/403_29/.claude -name installed* -o -name enabled*)",
+      "Bash(while read:*)",
+      "Bash(do echo:*)",
+      "Read(//c/Users/403_29/project_b/260406/**)",
+      "Bash(done)",
+      "Bash(xargs grep:*)",
+      "Bash(mkdir -p \"C:/Users/403_29/.claude/plugins/buddy/.claude-plugin\")",
+      "Bash(mkdir -p \"C:/Users/403_29/.claude/plugins/buddy/skills/buddy\")",
+      "Bash(python:*)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:8080/index.html)",
+      "Bash(python3:*)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:8080)"
+    ]
+  }
+}
