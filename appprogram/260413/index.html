@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>냉장고 재료 인식기</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" defer></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --blue:#4c9be8; --blue-d:#3182ce; --green:#38a169;
+      --orange:#dd6b20; --red:#e53e3e; --gray:#718096;
+      --bg:#f0f4f8; --card:#fff;
+    }
+    body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+      background:var(--bg); color:#1a202c; min-height:100vh; }
+
+    /* ── 헤더 ── */
+    .app-header {
+      background:#fff; border-bottom:1px solid #e2e8f0;
+      padding:14px 20px; display:flex; align-items:center; gap:10px;
+      position:sticky; top:0; z-index:50;
+    }
+    .app-header .logo-icon { font-size:24px; }
+    .app-header h1 { font-size:17px; font-weight:700; color:#2d3748; }
+
+    /* ── 탭 네비 ── */
+    .tab-nav {
+      display:flex; background:#fff; border-bottom:1px solid #e2e8f0;
+      overflow-x:auto; -webkit-overflow-scrolling:touch;
+    }
+    .tab-btn {
+      flex:1; min-width:80px; padding:13px 8px; border:none;
+      background:none; font-size:13px; font-weight:600; color:var(--gray);
+      cursor:pointer; border-bottom:2px solid transparent;
+      transition:color .15s,border-color .15s; white-space:nowrap;
+    }
+    .tab-btn.active { color:var(--blue); border-bottom-color:var(--blue); }
+
+    /* ── 탭 콘텐츠 ── */
+    .tab-panel { display:none; padding:20px 16px; max-width:700px; margin:0 auto; }
+    .tab-panel.active { display:block; }
+
+    /* ── 카드 ── */
+    .card { background:var(--card); border-radius:14px; padding:20px;
+      box-shadow:0 1px 3px rgba(0,0,0,.08),0 4px 12px rgba(0,0,0,.04); margin-bottom:14px; }
+    .card-title { font-size:12px; font-weight:700; color:#4a5568;
+      text-transform:uppercase; letter-spacing:.05em; margin-bottom:14px; }
+
+    /* ── 업로드 ── */
+    .upload-zone { border:2px dashed #cbd5e0; border-radius:12px; padding:32px 20px;
+      text-align:center; cursor:pointer; transition:border-color .2s,background .2s; position:relative; }
+    .upload-zone:hover,.upload-zone.dragover { border-color:var(--blue); background:#ebf4ff; }
+    .upload-zone input[type=file] { position:absolute; inset:0; opacity:0; cursor:pointer; }
+    .upload-icon { font-size:34px; margin-bottom:8px; }
+    .upload-zone p { color:var(--gray); font-size:14px; line-height:1.6; }
+    .upload-zone strong { color:var(--blue); }
+    .preview-wrap { margin-top:14px; display:none; }
+    .preview-wrap img { width:100%; max-height:260px; object-fit:cover; border-radius:10px; }
+    .preview-reset { margin-top:8px; font-size:13px; color:var(--red);
+      background:none; border:none; cursor:pointer; text-decoration:underline; }
+
+    /* ── 버튼 ── */
+    .btn { padding:12px 18px; border:none; border-radius:10px; font-size:14px;
+      font-weight:600; cursor:pointer; transition:background .2s,opacity .2s;
+      display:inline-flex; align-items:center; justify-content:center; gap:7px; }
+    .btn-full { width:100%; }
+    .btn-primary { background:var(--blue); color:#fff; }
+    .btn-primary:hover:not(:disabled) { background:var(--blue-d); }
+    .btn-success { background:var(--green); color:#fff; }
+    .btn-success:hover:not(:disabled) { background:#2f855a; }
+    .btn:disabled { opacity:.5; cursor:not-allowed; }
+    .btn-sm { padding:6px 12px; font-size:12px; border-radius:8px; }
+    .btn-ghost { background:#edf2f7; color:#4a5568; }
+    .btn-ghost:hover { background:#e2e8f0; }
+    .btn-danger { background:#fff5f5; color:var(--red); }
+    .btn-danger:hover { background:#fed7d7; }
+    .spinner { width:16px; height:16px; border-radius:50%;
+      border:2px solid rgba(255,255,255,.35); border-top-color:#fff;
+      animation:spin .7s linear infinite; display:none; }
+    @keyframes spin { to { transform:rotate(360deg); } }
+
+    /* ── 재료 태그 ── */
+    .tags { display:flex; flex-wrap:wrap; gap:7px; min-height:32px; }
+    .tag { display:inline-flex; align-items:center; gap:5px; border-radius:20px;
+      padding:5px 10px 5px 12px; font-size:13px; font-weight:500;
+      background:#ebf4ff; color:#2b6cb0; animation:pop .2s ease; }
+    .tag.urgent { background:#fff5eb; color:#c05621; }
+    .tag.pinned { background:#f0fff4; color:#276749; }
+    @keyframes pop { from{transform:scale(.8);opacity:0} to{transform:scale(1);opacity:1} }
+    .tag-qty { font-size:11px; opacity:.7; }
+    .tag-urgent-btn { background:none; border:1px solid currentColor; border-radius:10px;
+      padding:1px 5px; font-size:10px; cursor:pointer; opacity:.6; transition:opacity .15s; }
+    .tag-urgent-btn:hover { opacity:1; }
+    .tag.urgent .tag-urgent-btn { opacity:1; background:var(--orange); color:#fff; border-color:transparent; }
+    .tag-del { background:none; border:none; cursor:pointer; color:currentColor;
+      font-size:12px; opacity:.45; padding:0 2px; transition:opacity .15s; }
+    .tag-del:hover { opacity:1; }
+    .add-row { display:flex; gap:8px; margin-top:12px; }
+    .add-row input { flex:1; padding:9px 13px; border:1.5px solid #e2e8f0;
+      border-radius:8px; font-size:13px; outline:none; transition:border-color .2s; }
+    .add-row input:focus { border-color:var(--blue); }
+    .add-row button { padding:9px 14px; background:#edf2f7; color:#4a5568;
+      border:none; border-radius:8px; font-size:13px; font-weight:600;
+      cursor:pointer; white-space:nowrap; }
+    .add-row button:hover { background:#e2e8f0; }
+
+    /* ── 식단 필터 ── */
+    .filters { display:flex; flex-wrap:wrap; gap:7px; }
+    .filter-chip { padding:7px 13px; border-radius:20px; border:1.5px solid #e2e8f0;
+      background:#fff; font-size:13px; font-weight:500; color:#4a5568;
+      cursor:pointer; transition:all .15s; user-select:none; }
+    .filter-chip.on { border-color:var(--blue); background:#ebf4ff; color:var(--blue-d); }
+
+    /* ── 에러 ── */
+    .error-box { background:#fff5f5; border:1px solid #feb2b2; border-radius:10px;
+      padding:11px 14px; color:#c53030; font-size:13px; display:none; margin-top:10px; }
+
+    /* ── 레시피 카드 그리드 ── */
+    .recipe-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:14px; }
+    .recipe-card { background:var(--card); border-radius:14px; padding:18px;
+      box-shadow:0 1px 3px rgba(0,0,0,.07),0 4px 10px rgba(0,0,0,.04);
+      animation:pop .25s ease; position:relative; }
+    .recipe-card.priority { border-top:3px solid var(--orange); }
+    .recipe-name { font-size:16px; font-weight:700; margin-bottom:9px; }
+    .recipe-meta { display:flex; gap:7px; flex-wrap:wrap; margin-bottom:11px; }
+    .meta-chip { font-size:11px; padding:3px 9px; border-radius:11px;
+      background:#edf2f7; color:#4a5568; font-weight:500; }
+    .meta-chip.urgent-flag { background:#fff5eb; color:var(--orange); }
+    .usage-bar-wrap { margin-bottom:12px; }
+    .usage-label { display:flex; justify-content:space-between;
+      font-size:11px; color:var(--gray); margin-bottom:3px; }
+    .usage-bar-bg { height:5px; background:#e2e8f0; border-radius:3px; overflow:hidden; }
+    .usage-bar-fill { height:100%; border-radius:3px;
+      background:linear-gradient(90deg,var(--green),#68d391); transition:width .6s ease; }
+    .used-ing-list { display:flex; flex-wrap:wrap; gap:4px; margin-bottom:12px; }
+    .used-ing { font-size:11px; background:#f0fff4; color:#276749; padding:2px 7px; border-radius:9px; }
+    .used-ing.urgent { background:#fffaf0; color:var(--orange); }
+    .steps-toggle { font-size:12px; color:var(--blue); cursor:pointer;
+      background:none; border:none; padding:0; font-weight:600; }
+    .steps-list { margin-top:9px; display:none; }
+    .steps-list.open { display:block; }
+    .step-item { display:flex; gap:9px; margin-bottom:7px; font-size:13px; color:#2d3748; }
+    .step-num { min-width:20px; height:20px; background:var(--blue); color:#fff;
+      border-radius:50%; font-size:10px; font-weight:700;
+      display:flex; align-items:center; justify-content:center; flex-shrink:0; margin-top:1px; }
+
+    /* ── 카드 액션 버튼 바 ── */
+    .card-actions { display:flex; gap:6px; margin-top:12px; border-top:1px solid #f0f0f0; padding-top:11px; flex-wrap:wrap; }
+    .card-actions .btn { flex:1; min-width:70px; }
+
+    /* ── 즐겨찾기 빈 상태 ── */
+    .empty-state { text-align:center; padding:60px 20px; color:var(--gray); }
+    .empty-state .empty-icon { font-size:48px; margin-bottom:12px; }
+    .empty-state p { font-size:14px; line-height:1.6; }
+
+    /* ── 히스토리 리스트 ── */
+    .history-item { background:var(--card); border-radius:12px; padding:16px;
+      margin-bottom:10px; box-shadow:0 1px 3px rgba(0,0,0,.07); }
+    .history-header { display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:8px; }
+    .history-date { font-size:13px; font-weight:700; color:#2d3748; }
+    .history-count { font-size:11px; color:var(--gray); background:#edf2f7;
+      padding:2px 8px; border-radius:10px; }
+    .history-ing { font-size:12px; color:#4a5568; line-height:1.6; margin-bottom:10px; }
+    .history-actions { display:flex; gap:7px; }
+
+    /* ── 설정 탭 ── */
+    .stat-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-bottom:16px; }
+    .stat-box { background:#f7fafc; border-radius:10px; padding:14px; text-align:center; }
+    .stat-num { font-size:24px; font-weight:800; color:var(--blue); }
+    .stat-label { font-size:11px; color:var(--gray); margin-top:3px; }
+    .pinned-hint { font-size:12px; color:var(--gray); margin-bottom:10px; }
+
+    /* ── 모달 (공유 레시피) ── */
+    .modal-backdrop { position:fixed; inset:0; background:rgba(0,0,0,.45);
+      display:none; align-items:center; justify-content:center; z-index:100; padding:16px; }
+    .modal-backdrop.open { display:flex; }
+    .modal { background:#fff; border-radius:16px; padding:24px;
+      width:100%; max-width:420px; max-height:85vh; overflow-y:auto;
+      box-shadow:0 20px 40px rgba(0,0,0,.2); }
+    .modal-title { font-size:16px; font-weight:700; margin-bottom:4px; }
+    .modal-sub { font-size:12px; color:var(--gray); margin-bottom:16px; }
+    .modal-close { position:absolute; top:16px; right:16px; background:none;
+      border:none; font-size:18px; cursor:pointer; color:var(--gray); }
+    .modal { position:relative; }
+
+    /* ── 토스트 ── */
+    .toast { position:fixed; bottom:24px; left:50%; transform:translateX(-50%) translateY(80px);
+      background:#1a202c; color:#fff; padding:10px 20px; border-radius:10px;
+      font-size:13px; font-weight:500; z-index:200;
+      transition:transform .3s ease, opacity .3s ease; opacity:0; white-space:nowrap; }
+    .toast.show { transform:translateX(-50%) translateY(0); opacity:1; }
+
+    .model-info { font-size:11px; color:#a0aec0; text-align:right; margin-top:4px; }
+    .urgent-hint { font-size:12px; color:var(--orange); margin-top:9px; display:none; }
+    .section-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:12px; }
+    .section-header h2 { font-size:15px; font-weight:700; color:#2d3748; }
+
+    @media(max-width:480px) {
+      .recipe-grid { grid-template-columns:1fr; }
+      .stat-grid { grid-template-columns:repeat(3,1fr); }
+    }
+  </style>
+</head>
+<body>
+
+<!-- 앱 헤더 -->
+<header class="app-header">
+  <span class="logo-icon">🧊</span>
+  <h1>냉장고 재료 인식기</h1>
+</header>
+
+<!-- 탭 네비게이션 -->
+<nav class="tab-nav">
+  <button class="tab-btn active" data-tab="main">🧊 현재</button>
+  <button class="tab-btn" data-tab="favorites">⭐ 즐겨찾기</button>
+  <button class="tab-btn" data-tab="history">📋 히스토리</button>
+  <button class="tab-btn" data-tab="settings">⚙️ 설정</button>
+</nav>
+
+<!-- ══ TAB: 현재 ══════════════════════════════════════════════ -->
+<div class="tab-panel active" id="tab-main">
+
+  <!-- STEP 1: 업로드 -->
+  <div class="card">
+    <div class="card-title">📷 1단계 — 냉장고 사진 업로드</div>
+    <div class="upload-zone" id="uploadZone">
+      <input type="file" id="fileInput" accept="image/*" />
+      <div class="upload-icon">📷</div>
+      <p><strong>클릭</strong>하거나 사진을 <strong>드래그</strong>해서 올려주세요</p>
+      <p style="margin-top:5px;font-size:12px;">JPG · PNG · WEBP 지원</p>
+    </div>
+    <div class="preview-wrap" id="previewWrap">
+      <img id="previewImg" src="" alt="미리보기" />
+      <button class="preview-reset" id="resetBtn">✕ 다시 선택</button>
+    </div>
+    <div class="error-box" id="errorBox1"></div>
+    <button class="btn btn-primary btn-full" id="analyzeBtn" style="margin-top:14px;" disabled>
+      <span class="spinner" id="spinner1"></span>
+      <span id="analyzeText">사진을 먼저 업로드해주세요</span>
+    </button>
+  </div>
+
+  <!-- STEP 1 결과: 재료 목록 -->
+  <div class="card" id="ingredientCard" style="display:none;">
+    <div class="card-title">🥬 인식된 재료 <span id="ingCount" style="font-weight:400;text-transform:none;font-size:11px;"></span></div>
+    <div class="tags" id="tagsContainer"></div>
+    <p class="urgent-hint" id="urgentHint">⚠️ 주황색 재료를 우선 활용하는 레시피를 상단에 배치합니다.</p>
+    <div class="add-row">
+      <input type="text" id="addInput" placeholder="재료 직접 추가..." maxlength="20" />
+      <button id="addBtn">+ 추가</button>
+    </div>
+    <div class="model-info" id="recogModel"></div>
+  </div>
+
+  <!-- STEP 2: 레시피 추천 -->
+  <div class="card" id="recipeFilterCard" style="display:none;">
+    <div class="card-title">🍳 2단계 — 레시피 추천</div>
+    <p style="font-size:12px;color:var(--gray);margin-bottom:10px;">식단 제한 (선택)</p>
+    <div class="filters" id="filtersContainer">
+      <span class="filter-chip" data-val="채식">🌿 채식</span>
+      <span class="filter-chip" data-val="비건">🌱 비건</span>
+      <span class="filter-chip" data-val="글루텐프리">🌾 글루텐프리</span>
+      <span class="filter-chip" data-val="유제품 제외">🥛 유제품 제외</span>
+    </div>
+    <div class="error-box" id="errorBox2"></div>
+    <button class="btn btn-success btn-full" id="recipeBtn" style="margin-top:14px;">
+      <span class="spinner" id="spinner2"></span>
+      <span id="recipeText">레시피 추천 받기</span>
+    </button>
+  </div>
+
+  <!-- STEP 2 결과 -->
+  <div id="recipeResultSection" style="display:none;">
+    <div class="section-header">
+      <h2>✨ 추천 레시피</h2>
+      <div class="model-info" id="recipeModel"></div>
+    </div>
+    <div class="recipe-grid" id="recipeGrid"></div>
+  </div>
+</div>
+
+<!-- ══ TAB: 즐겨찾기 ══════════════════════════════════════════ -->
+<div class="tab-panel" id="tab-favorites">
+  <div class="section-header" style="margin-bottom:14px;">
+    <h2>⭐ 저장된 레시피</h2>
+    <span id="favCount" style="font-size:12px;color:var(--gray);"></span>
+  </div>
+  <div class="recipe-grid" id="favGrid"></div>
+  <div class="empty-state" id="favEmpty" style="display:none;">
+    <div class="empty-icon">⭐</div>
+    <p>저장된 레시피가 없습니다.<br>추천 레시피에서 ⭐ 버튼을 눌러 저장하세요.</p>
+  </div>
+</div>
+
+<!-- ══ TAB: 히스토리 ══════════════════════════════════════════ -->
+<div class="tab-panel" id="tab-history">
+  <div class="section-header" style="margin-bottom:14px;">
+    <h2>📋 스캔 히스토리</h2>
+    <button class="btn btn-ghost btn-sm" id="clearHistoryBtn">전체 삭제</button>
+  </div>
+  <div id="historyList"></div>
+  <div class="empty-state" id="historyEmpty" style="display:none;">
+    <div class="empty-icon">📋</div>
+    <p>아직 스캔 기록이 없습니다.<br>냉장고 사진을 업로드해보세요.</p>
+  </div>
+</div>
+
+<!-- ══ TAB: 설정 ══════════════════════════════════════════════ -->
+<div class="tab-panel" id="tab-settings">
+
+  <!-- 이번 달 통계 -->
+  <div class="card">
+    <div class="card-title">📊 이번 달 통계</div>
+    <div class="stat-grid">
+      <div class="stat-box"><div class="stat-num" id="statScans">0</div><div class="stat-label">스캔 횟수</div></div>
+      <div class="stat-box"><div class="stat-num" id="statIngredients">0</div><div class="stat-label">인식 재료</div></div>
+      <div class="stat-box"><div class="stat-num" id="statSaved">0</div><div class="stat-label">저장 레시피</div></div>
+    </div>
+  </div>
+
+  <!-- 고정 재료 -->
+  <div class="card">
+    <div class="card-title">📌 고정 재료 (항상 있는 재료)</div>
+    <p class="pinned-hint">냉장고 인식 시 자동으로 목록에 추가됩니다.</p>
+    <div class="tags" id="pinnedTags"></div>
+    <div class="add-row" style="margin-top:12px;">
+      <input type="text" id="pinnedInput" placeholder="소금, 식용유, 간장..." maxlength="20" />
+      <button id="pinnedAddBtn">+ 추가</button>
+    </div>
+    <p style="font-size:11px;color:var(--gray);margin-top:10px;">예: 소금 · 설탕 · 간장 · 식용유 · 참기름 · 후추</p>
+  </div>
+
+</div>
+
+<!-- ══ 공유 레시피 모달 ═════════════════════════════════════ -->
+<div class="modal-backdrop" id="shareModal">
+  <div class="modal">
+    <button class="modal-close" id="shareModalClose">✕</button>
+    <div class="modal-title">공유된 레시피</div>
+    <div class="modal-sub">링크를 통해 전달받은 레시피입니다.</div>
+    <div id="sharedRecipeContent"></div>
+    <button class="btn btn-primary btn-full" id="useSharedRecipeBtn" style="margin-top:14px;">
+      이 재료로 레시피 추천받기
+    </button>
+  </div>
+</div>
+
+<!-- 토스트 -->
+<div class="toast" id="toast"></div>
+
+<script>
+// ══════════════════════════════════════════════════════════
+//  스토리지 키
+// ══════════════════════════════════════════════════════════
+const LS = {
+  saved:   'fridge_saved',    // [{id, savedAt, recipe, sourceIngredients}]
+  history: 'fridge_history',  // [{id, date, ingredients, model}]
+  pinned:  'fridge_pinned',   // [{name, quantity:''}]
+};
+
+function load(key)        { try { return JSON.parse(localStorage.getItem(key)) || []; } catch { return []; } }
+function save(key, data)  { localStorage.setItem(key, JSON.stringify(data)); }
+
+// ══════════════════════════════════════════════════════════
+//  앱 상태
+// ══════════════════════════════════════════════════════════
+let imageBase64   = null;
+let ingredients   = [];
+let activeFilters = new Set();
+
+const $ = id => document.getElementById(id);
+
+// ══════════════════════════════════════════════════════════
+//  탭 네비게이션
+// ══════════════════════════════════════════════════════════
+document.querySelectorAll('.tab-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    $('tab-' + btn.dataset.tab).classList.add('active');
+    if (btn.dataset.tab === 'favorites') renderFavorites();
+    if (btn.dataset.tab === 'history')   renderHistory();
+    if (btn.dataset.tab === 'settings')  renderSettings();
+  });
+});
+
+// ══════════════════════════════════════════════════════════
+//  업로드
+// ══════════════════════════════════════════════════════════
+$('fileInput').addEventListener('change', e => loadFile(e.target.files[0]));
+$('uploadZone').addEventListener('dragover', e => { e.preventDefault(); $('uploadZone').classList.add('dragover'); });
+$('uploadZone').addEventListener('dragleave', () => $('uploadZone').classList.remove('dragover'));
+$('uploadZone').addEventListener('drop', e => {
+  e.preventDefault(); $('uploadZone').classList.remove('dragover');
+  const f = e.dataTransfer.files[0];
+  if (f?.type.startsWith('image/')) loadFile(f);
+});
+
+function loadFile(file) {
+  if (!file) return;
+  new FileReader().addEventListener('load', ev => {
+    imageBase64 = ev.target.result;
+    $('previewImg').src = imageBase64;
+    $('previewWrap').style.display = 'block';
+    $('uploadZone').style.cssText = 'pointer-events:none;opacity:.4';
+    $('analyzeBtn').disabled = false;
+    $('analyzeText').textContent = '재료 인식 시작';
+    hideEl('errorBox1'); hideEl('ingredientCard'); hideEl('recipeFilterCard'); hideEl('recipeResultSection');
+  });
+  const reader = new FileReader(); reader.onload = ev => {
+    imageBase64 = ev.target.result;
+    $('previewImg').src = imageBase64;
+    $('previewWrap').style.display = 'block';
+    $('uploadZone').style.cssText = 'pointer-events:none;opacity:.4';
+    $('analyzeBtn').disabled = false;
+    $('analyzeText').textContent = '재료 인식 시작';
+    hideEl('errorBox1'); hideEl('ingredientCard'); hideEl('recipeFilterCard'); hideEl('recipeResultSection');
+  };
+  reader.readAsDataURL(file);
+}
+
+$('resetBtn').addEventListener('click', () => {
+  imageBase64 = null; $('fileInput').value = '';
+  $('previewWrap').style.display = 'none'; $('previewImg').src = '';
+  $('uploadZone').style.cssText = '';
+  $('analyzeBtn').disabled = true; $('analyzeText').textContent = '사진을 먼저 업로드해주세요';
+  hideEl('ingredientCard'); hideEl('recipeFilterCard'); hideEl('recipeResultSection');
+});
+
+// ══════════════════════════════════════════════════════════
+//  재료 인식
+// ══════════════════════════════════════════════════════════
+$('analyzeBtn').addEventListener('click', async () => {
+  if (!imageBase64) return;
+  setLoading('analyzeBtn','spinner1','analyzeText', true, '분석 중...');
+  hideEl('errorBox1');
+
+  try {
+    const res  = await fetch('/api/recognize', {
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({ imageBase64 }),
+    });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error);
+
+    // 고정 재료 자동 병합
+    const pinned = load(LS.pinned);
+    const recognized = data.ingredients.map(i => ({ ...i, urgent:false, pinned:false }));
+    const pinnedNew = pinned.filter(p => !recognized.some(r => r.name === p.name))
+                            .map(p => ({ ...p, urgent:false, pinned:true }));
+    ingredients = [...recognized, ...pinnedNew];
+
+    // 히스토리 저장 (최대 30건 FIFO)
+    const hist = load(LS.history);
+    hist.unshift({ id:Date.now(), date:new Date().toISOString(), ingredients: data.ingredients, model:data.model });
+    save(LS.history, hist.slice(0, 30));
+
+    $('recogModel').textContent = `모델: ${data.model}`;
+    renderTags();
+    showEl('ingredientCard'); showEl('recipeFilterCard');
+    $('ingredientCard').scrollIntoView({ behavior:'smooth', block:'start' });
+  } catch(e) {
+    showError('errorBox1', e.message);
+  } finally {
+    setLoading('analyzeBtn','spinner1','analyzeText', false, '재료 다시 인식');
+  }
+});
+
+// ══════════════════════════════════════════════════════════
+//  재료 태그
+// ══════════════════════════════════════════════════════════
+function renderTags() {
+  const c = $('tagsContainer'); c.innerHTML = '';
+  $('ingCount').textContent = `(${ingredients.length}개)`;
+  const hasUrgent = ingredients.some(i => i.urgent);
+  $('urgentHint').style.display = hasUrgent ? 'block' : 'none';
+
+  if (!ingredients.length) {
+    c.innerHTML = '<span style="color:#a0aec0;font-size:13px;">재료를 추가해주세요</span>'; return;
+  }
+  ingredients.forEach((item, i) => {
+    const cls = ['tag', item.urgent ? 'urgent' : '', item.pinned ? 'pinned' : ''].filter(Boolean).join(' ');
+    const tag = document.createElement('span');
+    tag.className = cls;
+    tag.innerHTML = `${item.pinned ? '📌 ' : ''}${item.name}
+      ${item.quantity ? `<span class="tag-qty">${item.quantity}</span>` : ''}
+      <button class="tag-urgent-btn" data-i="${i}">⚠️</button>
+      <button class="tag-del" data-i="${i}">✕</button>`;
+    c.appendChild(tag);
+  });
+  c.querySelectorAll('.tag-urgent-btn').forEach(b =>
+    b.addEventListener('click', () => { ingredients[+b.dataset.i].urgent = !ingredients[+b.dataset.i].urgent; renderTags(); }));
+  c.querySelectorAll('.tag-del').forEach(b =>
+    b.addEventListener('click', () => { ingredients.splice(+b.dataset.i, 1); renderTags(); }));
+}
+
+$('addBtn').addEventListener('click', addIngredient);
+$('addInput').addEventListener('keydown', e => { if (e.key==='Enter') addIngredient(); });
+function addIngredient() {
+  const v = $('addInput').value.trim(); if (!v) return;
+  ingredients.push({ name:v, quantity:'', urgent:false, pinned:false });
+  renderTags(); $('addInput').value = ''; $('addInput').focus();
+}
+
+// ══════════════════════════════════════════════════════════
+//  식단 필터
+// ══════════════════════════════════════════════════════════
+document.querySelectorAll('.filter-chip').forEach(chip => {
+  chip.addEventListener('click', () => {
+    const v = chip.dataset.val;
+    activeFilters.has(v) ? (activeFilters.delete(v), chip.classList.remove('on'))
+                         : (activeFilters.add(v),    chip.classList.add('on'));
+  });
+});
+
+// ══════════════════════════════════════════════════════════
+//  레시피 추천
+// ══════════════════════════════════════════════════════════
+$('recipeBtn').addEventListener('click', () => requestRecipes(ingredients));
+
+async function requestRecipes(ingList) {
+  if (!ingList.length) return;
+  setLoading('recipeBtn','spinner2','recipeText', true, '레시피 생성 중...');
+  hideEl('errorBox2'); hideEl('recipeResultSection');
+
+  try {
+    const res  = await fetch('/api/recipe', {
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({ ingredients:ingList, filters:[...activeFilters] }),
+    });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error);
+
+    $('recipeModel').textContent = `모델: ${data.model}`;
+    renderRecipes(data.recipes, ingList, $('recipeGrid'), true);
+    showEl('recipeResultSection');
+    $('recipeResultSection').scrollIntoView({ behavior:'smooth', block:'start' });
+  } catch(e) {
+    showError('errorBox2', e.message);
+  } finally {
+    setLoading('recipeBtn','spinner2','recipeText', false, '다시 추천받기');
+  }
+}
+
+// ══════════════════════════════════════════════════════════
+//  레시피 카드 렌더링 (현재탭 + 즐겨찾기 공용)
+// ══════════════════════════════════════════════════════════
+function renderRecipes(recipes, sourceIngredients, container, showSave) {
+  container.innerHTML = '';
+  const urgentNames = new Set((sourceIngredients||[]).filter(i=>i.urgent).map(i=>i.name));
+
+  recipes.forEach((r, idx) => {
+    const hasUrgent  = (r.usedIngredients||[]).some(n => urgentNames.has(n));
+    const usage      = Math.min(100, Math.max(0, r.usageRate||0));
+    const cardId     = `rc-${Date.now()}-${idx}`;
+
+    const metaChips = [
+      `<span class="meta-chip">⏱ ${r.time||'?'}</span>`,
+      `<span class="meta-chip">${diffIcon(r.difficulty)} ${r.difficulty||'?'}</span>`,
+      hasUrgent ? `<span class="meta-chip urgent-flag">⚠️ 임박 활용</span>` : '',
+    ].join('');
+
+    const usedIng = (r.usedIngredients||[]).map(n =>
+      `<span class="used-ing${urgentNames.has(n)?' urgent':''}">${n}</span>`
+    ).join('');
+
+    const steps = (r.steps||[]).map((s,si) =>
+      `<div class="step-item"><span class="step-num">${si+1}</span><span>${s.replace(/^\d+[.)]\s*/,'')}</span></div>`
+    ).join('');
+
+    const card = document.createElement('div');
+    card.className = 'recipe-card' + (hasUrgent?' priority':'');
+    card.id = cardId;
+    card.innerHTML = `
+      <div class="recipe-name">${r.name||'레시피'}</div>
+      <div class="recipe-meta">${metaChips}</div>
+      <div class="usage-bar-wrap">
+        <div class="usage-label"><span>재료 활용률</span><span>${usage}%</span></div>
+        <div class="usage-bar-bg"><div class="usage-bar-fill" style="width:${usage}%"></div></div>
+      </div>
+      <div class="used-ing-list">${usedIng}</div>
+      <button class="steps-toggle">▶ 조리 방법 보기</button>
+      <div class="steps-list">${steps}</div>
+      <div class="card-actions">
+        ${showSave ? `<button class="btn btn-ghost btn-sm save-btn" data-idx="${idx}">⭐ 저장</button>` : ''}
+        <button class="btn btn-ghost btn-sm share-url-btn" data-idx="${idx}">🔗 공유</button>
+        <button class="btn btn-ghost btn-sm download-btn" data-card="${cardId}">📷 저장</button>
+        ${!showSave ? `<button class="btn btn-danger btn-sm del-fav-btn" data-idx="${idx}">🗑 삭제</button>` : ''}
+      </div>`;
+
+    // 조리 방법 토글
+    card.querySelector('.steps-toggle').addEventListener('click', function() {
+      const list = card.querySelector('.steps-list');
+      const open = list.classList.toggle('open');
+      this.textContent = open ? '▼ 조리 방법 닫기' : '▶ 조리 방법 보기';
+    });
+
+    // 저장
+    if (showSave) {
+      card.querySelector('.save-btn').addEventListener('click', () => {
+        saveRecipe(r, sourceIngredients);
+        card.querySelector('.save-btn').textContent = '⭐ 저장됨';
+        card.querySelector('.save-btn').disabled = true;
+      });
+    }
+
+    // URL 공유
+    card.querySelector('.share-url-btn').addEventListener('click', () => {
+      const encoded = btoa(encodeURIComponent(JSON.stringify({ recipe:r, ingredients:sourceIngredients })));
+      const url = `${location.origin}${location.pathname}?share=${encoded}`;
+      navigator.clipboard.writeText(url).then(() => showToast('📋 링크가 복사되었습니다!')).catch(() => {
+        prompt('아래 링크를 복사하세요:', url);
+      });
+    });
+
+    // 이미지 다운로드
+    card.querySelector('.download-btn').addEventListener('click', async () => {
+      const btn = card.querySelector('.download-btn');
+      btn.textContent = '⏳'; btn.disabled = true;
+      try {
+        const canvas = await html2canvas(card, { scale:2, backgroundColor:'#ffffff' });
+        const a = document.createElement('a');
+        a.download = `${r.name||'recipe'}.png`; a.href = canvas.toDataURL(); a.click();
+        showToast('📷 이미지로 저장되었습니다!');
+      } catch { showToast('이미지 저장에 실패했습니다.'); }
+      finally { btn.textContent = '📷 저장'; btn.disabled = false; }
+    });
+
+    // 즐겨찾기 삭제
+    if (!showSave) {
+      card.querySelector('.del-fav-btn').addEventListener('click', () => {
+        const favs = load(LS.saved);
+        favs.splice(+card.querySelector('.del-fav-btn').dataset.idx, 1);
+        save(LS.saved, favs); renderFavorites();
+      });
+    }
+
+    container.appendChild(card);
+  });
+}
+
+function diffIcon(d) {
+  if (!d) return '📊';
+  if (d.includes('쉬')) return '🟢';
+  if (d.includes('보통')) return '🟡';
+  return '🔴';
+}
+
+// ══════════════════════════════════════════════════════════
+//  즐겨찾기
+// ══════════════════════════════════════════════════════════
+function saveRecipe(recipe, sourceIngredients) {
+  const favs = load(LS.saved);
+  favs.unshift({ id:Date.now(), savedAt:new Date().toISOString(), recipe, sourceIngredients });
+  save(LS.saved, favs);
+  showToast('⭐ 레시피가 저장되었습니다!');
+}
+
+function renderFavorites() {
+  const favs = load(LS.saved);
+  $('favCount').textContent = `${favs.length}개`;
+  const grid  = $('favGrid');
+  grid.innerHTML = '';
+
+  if (!favs.length) { showEl('favEmpty'); return; } else hideEl('favEmpty');
+
+  favs.forEach((fav, i) => {
+    const wrapper = document.createElement('div');
+    const cardId = `fav-${fav.id}`;
+    wrapper.id = cardId;
+
+    // 재추천 버튼 래퍼
+    const regen = document.createElement('div');
+    regen.style.cssText = 'margin-bottom:8px;';
+    const regenBtn = document.createElement('button');
+    regenBtn.className = 'btn btn-ghost btn-sm btn-full';
+    regenBtn.textContent = '🔄 이 재료로 다시 추천';
+    regenBtn.addEventListener('click', async () => {
+      // 현재 탭으로 이동 후 재추천
+      document.querySelector('[data-tab="main"]').click();
+      ingredients = (fav.sourceIngredients||[]).map(i => ({ ...i, urgent:false, pinned:false }));
+      renderTags(); showEl('ingredientCard'); showEl('recipeFilterCard');
+      await requestRecipes(ingredients);
+    });
+    regen.appendChild(regenBtn);
+    wrapper.appendChild(regen);
+
+    // 임시 컨테이너로 카드 1개 렌더링
+    const tempGrid = document.createElement('div');
+    // 저장 버튼 대신 삭제 버튼 (showSave=false → del-fav-btn 사용)
+    // 즐겨찾기 탭에서는 저장 버튼 없이 삭제만
+    renderRecipes([fav.recipe], fav.sourceIngredients||[], tempGrid, false);
+    // del-fav-btn의 data-idx를 실제 배열 인덱스로 교체
+    const delBtn = tempGrid.querySelector('.del-fav-btn');
+    if (delBtn) {
+      delBtn.removeEventListener('click', ()=>{});
+      delBtn.addEventListener('click', () => {
+        const all = load(LS.saved);
+        const newList = all.filter(f => f.id !== fav.id);
+        save(LS.saved, newList); renderFavorites();
+        showToast('🗑 레시피가 삭제되었습니다.');
+      });
+    }
+    wrapper.appendChild(tempGrid.firstChild);
+    grid.appendChild(wrapper);
+  });
+}
+
+// ══════════════════════════════════════════════════════════
+//  히스토리
+// ══════════════════════════════════════════════════════════
+function renderHistory() {
+  const hist = load(LS.history);
+  const list = $('historyList'); list.innerHTML = '';
+  if (!hist.length) { showEl('historyEmpty'); return; } else hideEl('historyEmpty');
+
+  hist.forEach(entry => {
+    const d    = new Date(entry.date);
+    const dateStr = `${d.getFullYear()}.${pad(d.getMonth()+1)}.${pad(d.getDate())} ${pad(d.getHours())}:${pad(d.getMinutes())}`;
+    const names = (entry.ingredients||[]).map(i=>i.name);
+    const preview = names.slice(0,6).join(', ') + (names.length>6 ? ` 외 ${names.length-6}개` : '');
+
+    const item = document.createElement('div');
+    item.className = 'history-item';
+    item.innerHTML = `
+      <div class="history-header">
+        <span class="history-date">📅 ${dateStr}</span>
+        <span class="history-count">${names.length}개 재료</span>
+      </div>
+      <div class="history-ing">${preview}</div>
+      <div class="history-actions">
+        <button class="btn btn-ghost btn-sm" style="flex:1;">🍳 이 재료로 레시피 추천</button>
+        <button class="btn btn-danger btn-sm del-hist-btn">🗑</button>
+      </div>`;
+
+    item.querySelector('.history-actions .btn-ghost').addEventListener('click', async () => {
+      document.querySelector('[data-tab="main"]').click();
+      ingredients = (entry.ingredients||[]).map(i => ({ ...i, urgent:false, pinned:false }));
+      renderTags(); showEl('ingredientCard'); showEl('recipeFilterCard');
+      await requestRecipes(ingredients);
+    });
+
+    item.querySelector('.del-hist-btn').addEventListener('click', () => {
+      const all = load(LS.history).filter(h => h.id !== entry.id);
+      save(LS.history, all); renderHistory();
+    });
+
+    list.appendChild(item);
+  });
+}
+
+$('clearHistoryBtn').addEventListener('click', () => {
+  if (!confirm('스캔 히스토리를 모두 삭제하시겠습니까?')) return;
+  save(LS.history, []); renderHistory(); showToast('히스토리가 삭제되었습니다.');
+});
+
+// ══════════════════════════════════════════════════════════
+//  설정 - 통계
+// ══════════════════════════════════════════════════════════
+function renderSettings() {
+  renderPinnedTags();
+  const now   = new Date();
+  const month = `${now.getFullYear()}-${pad(now.getMonth()+1)}`;
+  const hist  = load(LS.history).filter(h => h.date.startsWith(month));
+  const favs  = load(LS.saved);
+  $('statScans').textContent       = hist.length;
+  $('statIngredients').textContent = hist.reduce((s,h) => s + (h.ingredients?.length||0), 0);
+  $('statSaved').textContent       = favs.length;
+}
+
+// ══════════════════════════════════════════════════════════
+//  고정 재료
+// ══════════════════════════════════════════════════════════
+function renderPinnedTags() {
+  const pinned = load(LS.pinned);
+  const c = $('pinnedTags'); c.innerHTML = '';
+  if (!pinned.length) { c.innerHTML = '<span style="color:#a0aec0;font-size:13px;">고정 재료 없음</span>'; return; }
+  pinned.forEach((item, i) => {
+    const tag = document.createElement('span');
+    tag.className = 'tag pinned';
+    tag.innerHTML = `📌 ${item.name}<button class="tag-del" data-i="${i}">✕</button>`;
+    tag.querySelector('.tag-del').addEventListener('click', () => {
+      const all = load(LS.pinned); all.splice(i, 1); save(LS.pinned, all); renderPinnedTags();
+    });
+    c.appendChild(tag);
+  });
+}
+
+$('pinnedAddBtn').addEventListener('click', addPinned);
+$('pinnedInput').addEventListener('keydown', e => { if (e.key==='Enter') addPinned(); });
+function addPinned() {
+  const v = $('pinnedInput').value.trim(); if (!v) return;
+  const all = load(LS.pinned);
+  if (!all.some(p => p.name === v)) { all.push({ name:v, quantity:'' }); save(LS.pinned, all); }
+  renderPinnedTags(); $('pinnedInput').value = ''; $('pinnedInput').focus();
+}
+
+// ══════════════════════════════════════════════════════════
+//  URL 공유 레시피 처리
+// ══════════════════════════════════════════════════════════
+(function checkSharedRecipe() {
+  const params = new URLSearchParams(location.search);
+  if (!params.has('share')) return;
+  try {
+    const { recipe, ingredients: srcIng } = JSON.parse(decodeURIComponent(atob(params.get('share'))));
+    const content = $('sharedRecipeContent');
+    const grid = document.createElement('div');
+    renderRecipes([recipe], srcIng||[], grid, false);
+    content.appendChild(grid.firstChild);
+
+    $('useSharedRecipeBtn').addEventListener('click', async () => {
+      $('shareModal').classList.remove('open');
+      document.querySelector('[data-tab="main"]').click();
+      ingredients = (srcIng||[]).map(i => ({ ...i, urgent:false, pinned:false }));
+      renderTags(); showEl('ingredientCard'); showEl('recipeFilterCard');
+      await requestRecipes(ingredients);
+    });
+
+    $('shareModal').classList.add('open');
+  } catch { /* 잘못된 공유 링크 무시 */ }
+})();
+
+$('shareModalClose').addEventListener('click', () => $('shareModal').classList.remove('open'));
+$('shareModal').addEventListener('click', e => { if (e.target===$('shareModal')) $('shareModal').classList.remove('open'); });
+
+// ══════════════════════════════════════════════════════════
+//  유틸
+// ══════════════════════════════════════════════════════════
+function setLoading(btnId, spinnerId, textId, on, label) {
+  $(btnId).disabled = on;
+  $(spinnerId).style.display = on ? 'block' : 'none';
+  $(textId).textContent = label;
+}
+function showError(boxId, msg) { const el=$(boxId); el.textContent='⚠️ '+msg; el.style.display='block'; }
+function showEl(id) { $(id).style.display=''; }
+function hideEl(id) { $(id).style.display='none'; }
+function pad(n) { return String(n).padStart(2,'0'); }
+
+let toastTimer;
+function showToast(msg) {
+  const t = $('toast'); t.textContent = msg; t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove('show'), 2500);
+}
+</script>
+</body>
+</html>
