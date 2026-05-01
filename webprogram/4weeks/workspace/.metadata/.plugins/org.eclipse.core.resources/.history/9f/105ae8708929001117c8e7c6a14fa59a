@@ -1,0 +1,25 @@
+package com.springmvs.repository;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.stereotype.Repository;
+
+import com.springmvc.domain.Book;
+
+@Repository
+public class BookrepositoryImpl implements BookRepository {
+	
+	private List<Book> listofBooks = new ArrayList<>();
+	
+	public BookrepositoryImpl() {
+		
+	}
+
+	@Override
+	public List<Book> getAllBookList() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

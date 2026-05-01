@@ -1,0 +1,15 @@
+package com.springmvs.repository;
+
+import java.util.List;
+
+import com.springmvc.domain.Book;
+
+public class BookrepositoryImpl implements BookRepository {
+
+	@Override
+	public List<Book> getAllBookList() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

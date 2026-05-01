@@ -1,0 +1,22 @@
+package com.springmvs.service;
+
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+
+import com.springmvc.domain.Book;
+import com.springmvs.repository.BookRepository;
+
+@Service
+public class BookServiceImpl implements BookService {
+	
+	// @Autowired
+	private BookRepository bookRepository;
+
+	@Override
+	public List<Book> getAllBookList() {
+		// TODO Auto-generated method stub
+		return this.bookRepository.getAllBookList();
+	}
+
+}

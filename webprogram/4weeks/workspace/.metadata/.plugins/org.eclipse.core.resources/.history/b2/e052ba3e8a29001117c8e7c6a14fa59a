@@ -1,0 +1,5 @@
+package com.springmvs.service;
+
+public interface BookService {
+
+}

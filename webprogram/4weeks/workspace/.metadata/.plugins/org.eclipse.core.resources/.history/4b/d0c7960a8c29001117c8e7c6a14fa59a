@@ -1,0 +1,26 @@
+package com.springmvc.controller;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+
+import com.springmvc.domain.Book;
+import com.springmvs.service.BookService;
+
+
+@Controller
+public class BookController {
+	@Autowired
+	private BookService bookService;
+	
+	
+	public String requestBookList (Model model) {
+		List<Book> list = this.bookService.getAllBookList();
+		model.addAttribute("bookList", list);
+		
+		return "books";
+	}
+
+}
