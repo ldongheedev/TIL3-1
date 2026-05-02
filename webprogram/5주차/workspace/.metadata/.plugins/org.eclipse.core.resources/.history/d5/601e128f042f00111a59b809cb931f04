@@ -1,0 +1,83 @@
+package com.springmvc.controller;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+import com.springmvc.domain.Book;
+import com.springmvc.service.BookService;
+
+
+@Controller
+public class BookController {
+	@Autowired
+	private BookService bookService;
+	
+	
+	@RequestMapping(value = "/books", method = RequestMethod.GET)
+	public String requestBookList (Model model) {
+		List<Book> list = this.bookService.getAllBookList();
+		model.addAttribute("bookList", list);
+		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+		Class.forName("org.h2.Driver");
+		
+		conn = DriverManager.getConnection("jdbc:h2:file:C:/webjavaapp/h2/data", "admin", "password");
+		conn.setAutoCommit(false);
+		
+		pstmt = conn.prepareStatement("select b_bookId, b_name, b_unitPrice, b_author. b_description, b_publisher, b_category, b_unitsInStock, b_releaseDate, b_condition from book");
+		rs = pstmt.executeQuery();
+		
+		List<Book> booklist = new ArrayList();
+		
+		while(rs.next()) {
+			Book book = new Book();
+			
+			book.setBookId(rs.getString(1));
+			book.setName(rs.getString(2));
+			// .........
+			
+			booklist.add(book);
+		} 
+		
+		conn.commit();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} finally {
+			if(rs != null)
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					//TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			
+			pstmt.close();
+			conn.close();
+		
+		}
+		
+
+		
+		
+		return "books";
+	}
+
+}
