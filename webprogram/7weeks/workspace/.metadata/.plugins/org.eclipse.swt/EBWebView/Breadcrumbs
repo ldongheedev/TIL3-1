@@ -1,0 +1,54 @@
+0:25:42 Microsoft.UnloadController.HasCompletedUnloadProcessing_True
+0:25:42 Microsoft.Shutdown.OnWindowClosing_MaybeClearBrowsingDataOnExit
+0:25:42 Microsoft.Shutdown.OnWindowClosing_ClearBrowsingDataOnExitNotInProgress
+0:25:42 Microsoft.Shutdown.OnWindowClosingPostClearBrowsingData_NoBrowsingDataCleared
+0:25:42 Widget Closed: BrowserWidget
+0:25:42 Microsoft.UnloadController.HasCompletedUnloadProcessing_True
+0:25:42 Microsoft.Shutdown.OnWindowClosing
+0:25:42 Microsoft.Shutdown.OnWindowClosing_DeleteScheduled
+0:25:42 Microsoft.Browser_Removed
+0:25:44 Tab1 StartNav56 #typed
+0:25:44 Tab1 FinishNav56
+0:25:44 Tab1 PageLoad
+0:26:57 Microsoft.NewBrowser_Popup
+0:26:57 Microsoft.BrowserList.AddBrowser
+0:26:57 Browser6 Insert active Tab6 at 0
+0:26:57 Tab6 StartNav57 #auto_toplevel
+0:26:57 Tab6 StartNav58 #typed
+0:26:57 Tab6 FinishNav57
+0:26:57 Tab6 PageLoad
+0:26:57 Tab6 FinishNav58
+0:26:57 Tab6 PageLoad
+0:26:58 Tab6 StartNav59 #typed
+0:26:58 Tab6 FinishNav59
+0:26:58 Tab6 PageLoad
+0:27:08 Tab6 StartNav60 #typed
+0:27:08 Tab6 FinishNav60
+0:27:08 Tab6 PageLoad
+0:27:19 Tab6 StartNav61 #typed
+0:27:19 Tab6 FinishNav61
+0:27:19 Tab6 PageLoad
+0:27:20 Tab6 StartNav62 #typed
+0:27:20 Tab6 FinishNav62
+0:27:20 Tab6 PageLoad
+0:28:22 Microsoft.NewBrowser_Popup
+0:28:22 Microsoft.BrowserList.AddBrowser
+0:28:22 Browser7 Insert active Tab7 at 0
+0:28:22 Tab7 StartNav63 #auto_toplevel
+0:28:22 Tab7 StartNav64 #typed
+0:28:22 Tab7 FinishNav63
+0:28:22 Tab7 PageLoad
+0:28:22 Tab7 FinishNav64
+0:28:22 Tab7 PageLoad
+0:28:22 Tab7 StartNav65 #typed
+0:28:23 Tab7 FinishNav65
+0:28:23 Tab7 PageLoad
+0:28:23 Tab7 StartNav66 #typed
+0:28:23 Tab7 FinishNav66
+0:28:23 Tab7 PageLoad
+0:28:40 Tab7 StartNav67 #typed
+0:28:40 Tab7 FinishNav67
+0:28:40 Tab7 PageLoad
+0:29:14 Tab7 StartNav68 #typed
+0:29:14 Tab7 FinishNav68
+0:29:14 Tab7 PageLoad
