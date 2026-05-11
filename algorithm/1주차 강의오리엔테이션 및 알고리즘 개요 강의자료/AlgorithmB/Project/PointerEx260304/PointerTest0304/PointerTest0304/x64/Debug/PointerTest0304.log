@@ -1,0 +1,7 @@
+﻿  pointerEx0304.c
+C:\AlgorithmB\Project\PointerEx260304\PointerTest0304\PointerTest0304\pointerEx0304.c(1,1): warning C4819: 현재 코드 페이지(949)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오.
+C:\AlgorithmB\Project\PointerEx260304\PointerTest0304\PointerTest0304\pointerEx0304.c(8,9): warning C4477: 'printf' : 서식 문자열 '%d'에 'int' 형식의 인수가 필요하지만 variadic 인수 1의 형식이 'int *'입니다.
+C:\AlgorithmB\Project\PointerEx260304\PointerTest0304\PointerTest0304\pointerEx0304.c(8,9): warning C4313: 'printf': 서식 문자열의 '%d'이(가) int *' 형식의 인수 1과(와) 충돌합니다.
+C:\AlgorithmB\Project\PointerEx260304\PointerTest0304\PointerTest0304\pointerEx0304.c(10,9): warning C4477: 'printf' : 서식 문자열 '%X'에 'unsigned int' 형식의 인수가 필요하지만 variadic 인수 1의 형식이 'int *'입니다.
+C:\AlgorithmB\Project\PointerEx260304\PointerTest0304\PointerTest0304\pointerEx0304.c(10,9): warning C4313: 'printf': 서식 문자열의 '%X'이(가) int *' 형식의 인수 1과(와) 충돌합니다.
+  PointerTest0304.vcxproj -> C:\AlgorithmB\Project\PointerEx260304\PointerTest0304\x64\Debug\PointerTest0304.exe
