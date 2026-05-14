@@ -1,0 +1,112 @@
+﻿#include <stdio.h>
+#include <stdlib.h>
+#include "LinkedQueue.h"
+
+// 공백 연결 큐를 생성하는 연산
+LQueueType* createLinkedQueue() {
+	LQueueType* LQ;
+	LQ = (LQueueType*)malloc(sizeof(LQueueType));
+	LQ->front = NULL;
+	LQ->rear = NULL;
+	return LQ;
+}
+
+// 연결 큐가 공백 상태인지 검사하는 연산
+int isLQEmpty(LQueueType* LQ) {
+	if (LQ->front == NULL) {
+		printf(" Linked Queue is empty! ");
+		return 1;
+	}
+	else return 0;
+}
+
+// 연결 큐의 rear에 원소를 삽입하는 연산
+void enLQueue(LQueueType* LQ, element item) {
+	QNode* newNode = (QNode*)malloc(sizeof(QNode));
+	newNode->data = item;
+	newNode->link = NULL;
+	if (LQ->front == NULL) {		// 현재 연결 큐가 공백 상태인 경우
+		LQ->front = newNode;
+		LQ->rear = newNode;
+	}
+	else {						// 현재 연결 큐가 공백 상태가 아닌 경우
+		LQ->rear->link = newNode;
+		LQ->rear = newNode;
+	}
+}
+
+// 연결 큐에서 원소를 삭제하고 반환하는 연산
+element deLQueue(LQueueType* LQ) {
+	QNode* old = LQ->front;
+	element item;
+	if (isLQEmpty(LQ)) 
+		return;
+	else {
+		item = old->data;
+		LQ->front = LQ->front->link;
+		if (LQ->front == NULL)
+			LQ->rear = NULL;
+		free(old);
+		return item;
+	}
+}
+
+// 연결 큐에서 원소를 검색하는 연산
+element peekLQ(LQueueType* LQ) {
+	element item;
+	if (isLQEmpty(LQ)) return;
+	else {
+		item = LQ->front->data;
+		return item;
+	}
+}
+
+// 연결 큐의 원소를 출력하는 연산
+void printLQ(LQueueType* LQ) {
+	QNode* temp = LQ->front;
+	printf(" Linked Queue : [");
+	while (temp) {
+		printf("%3d", temp->data);
+		temp = temp->link;
+	}
+	printf(" ] ");
+}
+
+// 카드게임 연산 - N장의 카드 중 마지막에 남을 카드를 반환
+int cardGame(int N) {
+	LQueueType* LQ = createLinkedQueue();
+	int i, result;
+
+	// 1부터 N까지의 카드를 큐에 삽입
+	for (i = 1; i <= N; i++) {
+		enLQueue(LQ, i);
+	}
+
+	printf("\n *** 문제[013] 카드게임 ***\n");
+	printf(" N = %d 일 때\n", N);
+	printf(" 초기 카드 상태 >> ");
+	printLQ(LQ);
+
+	// 카드가 1장 남을 때까지 반복
+	while (!isLQEmpty(LQ) && LQ->front != LQ->rear) {
+		// 1단계: 가장 위의 카드를 버린다
+		printf("\n 카드 %d 버림", deLQueue(LQ));
+
+		// 2단계: 가장 위의 카드를 가장 아래로 이동
+		if (!isLQEmpty(LQ)) {
+			int card = deLQueue(LQ);
+			enLQueue(LQ, card);
+			printf(" >> 카드 %d 이동 >> ", card);
+			printLQ(LQ);
+		}
+	}
+
+	// 마지막 남은 카드 반환
+	if (!isLQEmpty(LQ)) {
+		result = peekLQ(LQ);
+		printf("\n\n [결과] 마지막에 남은 카드 : %d \n", result);
+		return result;
+	}
+
+	return -1;
+}

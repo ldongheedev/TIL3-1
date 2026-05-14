@@ -1,0 +1,10 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="CircularQueueSeq/CircularQueueSeq.vcxproj" Id="ece56826-0a7f-4e8c-be3e-9a5da468c1ea" />
+  <Project Path="DeQueueEx/DeQueueEx.vcxproj" Id="596b83e7-967e-4ca9-9861-46698a678126" />
+  <Project Path="LinkedQueue/LinkedQueue.vcxproj" Id="514216ff-8831-468b-9283-113293037aff" />
+  <Project Path="SequentialQueue/SequentialQueue.vcxproj" Id="d9a486a3-6038-488a-957e-e231c64324d4" />
+</Solution>

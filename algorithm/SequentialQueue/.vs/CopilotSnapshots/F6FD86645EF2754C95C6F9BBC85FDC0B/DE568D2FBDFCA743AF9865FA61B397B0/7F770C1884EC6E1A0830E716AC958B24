@@ -1,0 +1,26 @@
+﻿#include<stdio.h>
+#include <windows.h>
+#include "LinkedQueue.h"
+
+int main(void) 
+{
+	SetConsoleOutputCP(65001); //UTF-8,CP는 Code Page의 약자
+	SetConsoleCP(65001); // 입력도 필요하면 설정
+
+	// 카드게임 문제 해결
+	int N;
+	printf("\n ========== 카드게임 시뮬레이션 ==========\n");
+	printf(" N의 값을 입력하세요: ");
+	scanf("%d", &N);
+
+	if (N > 0) {
+		cardGame(N);
+	}
+	else {
+		printf(" 1 이상의 양수를 입력하세요.\n");
+	}
+
+	printf("\n");
+
+	return 0;
+}

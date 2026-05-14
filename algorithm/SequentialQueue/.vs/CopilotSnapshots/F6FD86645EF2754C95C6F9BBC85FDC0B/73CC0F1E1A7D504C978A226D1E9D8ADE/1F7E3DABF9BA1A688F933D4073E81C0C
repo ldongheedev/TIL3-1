@@ -1,0 +1,66 @@
+﻿#include<stdio.h>
+#include <windows.h>
+#include "LinkedQueue.h"
+
+// 카드게임 연산 - N장의 카드 중 마지막에 남을 카드를 반환
+int cardGame(int N) {
+    LQueueType* LQ = createLinkedQueue();
+    int i, result, removed;
+
+    // 1부터 N까지의 카드를 큐에 삽입
+    for (i = 1; i <= N; i++) {
+        enLQueue(LQ, i);
+    }
+
+    printf("\n *** 문제[013] 카드게임 ***\n");
+    printf(" N = %d 일 때\n\n", N);
+    printf(" 초기 카드 상태 >> ");
+    printLQ(LQ);
+    printf("\n\n");
+
+    // 카드가 1장 남을 때까지 반복
+    while (!isLQEmpty(LQ) && LQ->front != LQ->rear) {
+        // 1단계: 가장 위의 카드를 버린다
+        removed = deLQueue(LQ);
+        printf(" 카드 %c 버림", removed);
+
+        // 2단계: 가장 위의 카드를 가장 아래로 이동
+        if (!isLQEmpty(LQ)) {
+            char card = deLQueue(LQ);
+            enLQueue(LQ, card);
+            printf(" >> 카드 %c 이동 >> ", card);
+            printLQ(LQ);
+            printf("\n");
+        }
+    }
+
+    // 마지막 남은 카드 반환
+    if (!isLQEmpty(LQ)) {
+        char result_card = peekLQ(LQ);
+        printf("\n [결과] 마지막에 남은 카드 : %c \n", result_card);
+    }
+
+    return 0;
+}
+
+int main(void) 
+{
+    SetConsoleOutputCP(65001);
+    SetConsoleCP(65001);
+
+    int N;
+    printf("\n ========== 카드게임 시뮬레이션 ==========\n");
+    printf(" N의 값을 입력하세요: ");
+    scanf_s("%d", &N);
+
+    if (N > 0) {
+        cardGame(N);
+    }
+    else {
+        printf(" 1 이상의 양수를 입력하세요.\n");
+    }
+
+    printf("\n");
+
+    return 0;
+}

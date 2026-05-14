@@ -1,0 +1,28 @@
+﻿#include <stdio.h>
+#include <windows.h>
+#include "cQueueS.h"
+
+int main(void) 
+{
+	SetConsoleOutputCP(65001); //UTF-8,CP는 Code Page의 약자
+	SetConsoleCP(65001); // 입력도 필요하면 설정
+
+	QueueType* cQ = createCQueue();  // 큐 생성
+	element data;
+	printf("\n ***** 원형 큐 연산 ***** \n");
+	printf("\n 삽입 A>>");  enCQueue(cQ, 'A'); printCQ(cQ);
+	printf("\n 삽입 B>>");  enCQueue(cQ, 'B'); printCQ(cQ);
+	printf("\n 삽입 C>>");  enCQueue(cQ, 'C'); printCQ(cQ);
+	data = peekCQ(cQ);    printf(" peek item : %c \n", data);
+	printf("\n 삭제  >>");  data = deCQueue(cQ); printCQ(cQ);
+	printf("\t삭제 데이터: %c", data);
+	printf("\n 삭제  >>");  data = deCQueue(cQ); printCQ(cQ);
+	printf("\t삭제 데이터: %c", data);
+	printf("\n 삭제  >>");  data = deCQueue(cQ); printCQ(cQ);
+	printf("\t\t삭제 데이터: %c", data);
+	printf("\n 삽입 D>>");  enCQueue(cQ, 'D'); printCQ(cQ);
+	printf("\n 삽입 E>>");  enCQueue(cQ, 'E'); printCQ(cQ);
+
+	//getchar(); 
+	return 0;
+}

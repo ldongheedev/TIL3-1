@@ -1,0 +1,215 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "G:\\\uAC15\uC131\uAD00 \uAD50\uC218\uB2D8 \uC54C\uACE0\uB9AC\uC998\\10\uC8FC\uCC28 \uAC15\uC758 \uB0B4\uC6A9\\SequentialQueue\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{514216FF-8831-468B-9283-113293037AFF}|LinkedQueue\\LinkedQueue.vcxproj|G:\\\uAC15\uC131\uAD00 \uAD50\uC218\uB2D8 \uC54C\uACE0\uB9AC\uC998\\10\uC8FC\uCC28 \uAC15\uC758 \uB0B4\uC6A9\\SequentialQueue\\LinkedQueue\\card.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{514216FF-8831-468B-9283-113293037AFF}|LinkedQueue\\LinkedQueue.vcxproj|solutionrelative:LinkedQueue\\card.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{596B83E7-967E-4CA9-9861-46698A678126}|DeQueueEx\\DeQueueEx.vcxproj|G:\\\uAC15\uC131\uAD00 \uAD50\uC218\uB2D8 \uC54C\uACE0\uB9AC\uC998\\10\uC8FC\uCC28 \uAC15\uC758 \uB0B4\uC6A9\\SequentialQueue\\DeQueueEx\\deQue.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{596B83E7-967E-4CA9-9861-46698A678126}|DeQueueEx\\DeQueueEx.vcxproj|solutionrelative:DeQueueEx\\deQue.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{514216FF-8831-468B-9283-113293037AFF}|LinkedQueue\\LinkedQueue.vcxproj|G:\\\uAC15\uC131\uAD00 \uAD50\uC218\uB2D8 \uC54C\uACE0\uB9AC\uC998\\10\uC8FC\uCC28 \uAC15\uC758 \uB0B4\uC6A9\\SequentialQueue\\LinkedQueue\\LinkedQueue.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{514216FF-8831-468B-9283-113293037AFF}|LinkedQueue\\LinkedQueue.vcxproj|solutionrelative:LinkedQueue\\LinkedQueue.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{596B83E7-967E-4CA9-9861-46698A678126}|DeQueueEx\\DeQueueEx.vcxproj|G:\\\uAC15\uC131\uAD00 \uAD50\uC218\uB2D8 \uC54C\uACE0\uB9AC\uC998\\10\uC8FC\uCC28 \uAC15\uC758 \uB0B4\uC6A9\\SequentialQueue\\DeQueueEx\\dequeueEx.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{596B83E7-967E-4CA9-9861-46698A678126}|DeQueueEx\\DeQueueEx.vcxproj|solutionrelative:DeQueueEx\\dequeueEx.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{596B83E7-967E-4CA9-9861-46698A678126}|DeQueueEx\\DeQueueEx.vcxproj|G:\\\uAC15\uC131\uAD00 \uAD50\uC218\uB2D8 \uC54C\uACE0\uB9AC\uC998\\10\uC8FC\uCC28 \uAC15\uC758 \uB0B4\uC6A9\\SequentialQueue\\DeQueueEx\\deQue.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{596B83E7-967E-4CA9-9861-46698A678126}|DeQueueEx\\DeQueueEx.vcxproj|solutionrelative:DeQueueEx\\deQue.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{514216FF-8831-468B-9283-113293037AFF}|LinkedQueue\\LinkedQueue.vcxproj|G:\\\uAC15\uC131\uAD00 \uAD50\uC218\uB2D8 \uC54C\uACE0\uB9AC\uC998\\10\uC8FC\uCC28 \uAC15\uC758 \uB0B4\uC6A9\\SequentialQueue\\LinkedQueue\\LinkedQueue.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{514216FF-8831-468B-9283-113293037AFF}|LinkedQueue\\LinkedQueue.vcxproj|solutionrelative:LinkedQueue\\LinkedQueue.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{ECE56826-0A7F-4E8C-BE3E-9A5DA468C1EA}|CircularQueueSeq\\CircularQueueSeq.vcxproj|G:\\\uAC15\uC131\uAD00 \uAD50\uC218\uB2D8 \uC54C\uACE0\uB9AC\uC998\\10\uC8FC\uCC28 \uAC15\uC758 \uB0B4\uC6A9\\SequentialQueue\\CircularQueueSeq\\circularQueueSeq.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{ECE56826-0A7F-4E8C-BE3E-9A5DA468C1EA}|CircularQueueSeq\\CircularQueueSeq.vcxproj|solutionrelative:CircularQueueSeq\\circularQueueSeq.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{ECE56826-0A7F-4E8C-BE3E-9A5DA468C1EA}|CircularQueueSeq\\CircularQueueSeq.vcxproj|G:\\\uAC15\uC131\uAD00 \uAD50\uC218\uB2D8 \uC54C\uACE0\uB9AC\uC998\\10\uC8FC\uCC28 \uAC15\uC758 \uB0B4\uC6A9\\SequentialQueue\\CircularQueueSeq\\cQueueS.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{ECE56826-0A7F-4E8C-BE3E-9A5DA468C1EA}|CircularQueueSeq\\CircularQueueSeq.vcxproj|solutionrelative:CircularQueueSeq\\cQueueS.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{ECE56826-0A7F-4E8C-BE3E-9A5DA468C1EA}|CircularQueueSeq\\CircularQueueSeq.vcxproj|G:\\\uAC15\uC131\uAD00 \uAD50\uC218\uB2D8 \uC54C\uACE0\uB9AC\uC998\\10\uC8FC\uCC28 \uAC15\uC758 \uB0B4\uC6A9\\SequentialQueue\\CircularQueueSeq\\cQueueS.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{ECE56826-0A7F-4E8C-BE3E-9A5DA468C1EA}|CircularQueueSeq\\CircularQueueSeq.vcxproj|solutionrelative:CircularQueueSeq\\cQueueS.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D9A486A3-6038-488A-957E-E231C64324D4}|SequentialQueue\\SequentialQueue.vcxproj|G:\\\uAC15\uC131\uAD00 \uAD50\uC218\uB2D8 \uC54C\uACE0\uB9AC\uC998\\10\uC8FC\uCC28 \uAC15\uC758 \uB0B4\uC6A9\\SequentialQueue\\SequentialQueue\\sequentialQueue.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{D9A486A3-6038-488A-957E-E231C64324D4}|SequentialQueue\\SequentialQueue.vcxproj|solutionrelative:SequentialQueue\\sequentialQueue.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D9A486A3-6038-488A-957E-E231C64324D4}|SequentialQueue\\SequentialQueue.vcxproj|G:\\\uAC15\uC131\uAD00 \uAD50\uC218\uB2D8 \uC54C\uACE0\uB9AC\uC998\\10\uC8FC\uCC28 \uAC15\uC758 \uB0B4\uC6A9\\SequentialQueue\\SequentialQueue\\queueS.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{D9A486A3-6038-488A-957E-E231C64324D4}|SequentialQueue\\SequentialQueue.vcxproj|solutionrelative:SequentialQueue\\queueS.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D9A486A3-6038-488A-957E-E231C64324D4}|SequentialQueue\\SequentialQueue.vcxproj|G:\\\uAC15\uC131\uAD00 \uAD50\uC218\uB2D8 \uC54C\uACE0\uB9AC\uC998\\10\uC8FC\uCC28 \uAC15\uC758 \uB0B4\uC6A9\\SequentialQueue\\SequentialQueue\\queueS.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{D9A486A3-6038-488A-957E-E231C64324D4}|SequentialQueue\\SequentialQueue.vcxproj|solutionrelative:SequentialQueue\\queueS.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "card.c",
+              "DocumentMoniker": "G:\\\uAC15\uC131\uAD00 \uAD50\uC218\uB2D8 \uC54C\uACE0\uB9AC\uC998\\10\uC8FC\uCC28 \uAC15\uC758 \uB0B4\uC6A9\\SequentialQueue\\LinkedQueue\\card.c",
+              "RelativeDocumentMoniker": "LinkedQueue\\card.c",
+              "ToolTip": "G:\\\uAC15\uC131\uAD00 \uAD50\uC218\uB2D8 \uC54C\uACE0\uB9AC\uC998\\10\uC8FC\uCC28 \uAC15\uC758 \uB0B4\uC6A9\\SequentialQueue\\LinkedQueue\\card.c",
+              "RelativeToolTip": "LinkedQueue\\card.c",
+              "ViewState": "AgIAACkAAAAAAAAAAAAkwC4AAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000423|",
+              "WhenOpened": "2026-05-14T15:30:14.407Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "deQue.c",
+              "DocumentMoniker": "G:\\\uAC15\uC131\uAD00 \uAD50\uC218\uB2D8 \uC54C\uACE0\uB9AC\uC998\\10\uC8FC\uCC28 \uAC15\uC758 \uB0B4\uC6A9\\SequentialQueue\\DeQueueEx\\deQue.c",
+              "RelativeDocumentMoniker": "DeQueueEx\\deQue.c",
+              "ToolTip": "G:\\\uAC15\uC131\uAD00 \uAD50\uC218\uB2D8 \uC54C\uACE0\uB9AC\uC998\\10\uC8FC\uCC28 \uAC15\uC758 \uB0B4\uC6A9\\SequentialQueue\\DeQueueEx\\deQue.c",
+              "RelativeToolTip": "DeQueueEx\\deQue.c",
+              "ViewState": "AgIAAGwAAAAAAAAAAAAAADoAAAAOAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000423|",
+              "WhenOpened": "2026-05-06T03:54:10.915Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "deQue.h",
+              "DocumentMoniker": "G:\\\uAC15\uC131\uAD00 \uAD50\uC218\uB2D8 \uC54C\uACE0\uB9AC\uC998\\10\uC8FC\uCC28 \uAC15\uC758 \uB0B4\uC6A9\\SequentialQueue\\DeQueueEx\\deQue.h",
+              "RelativeDocumentMoniker": "DeQueueEx\\deQue.h",
+              "ToolTip": "G:\\\uAC15\uC131\uAD00 \uAD50\uC218\uB2D8 \uC54C\uACE0\uB9AC\uC998\\10\uC8FC\uCC28 \uAC15\uC758 \uB0B4\uC6A9\\SequentialQueue\\DeQueueEx\\deQue.h",
+              "RelativeToolTip": "DeQueueEx\\deQue.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-05-06T03:53:25.697Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "dequeueEx.c",
+              "DocumentMoniker": "G:\\\uAC15\uC131\uAD00 \uAD50\uC218\uB2D8 \uC54C\uACE0\uB9AC\uC998\\10\uC8FC\uCC28 \uAC15\uC758 \uB0B4\uC6A9\\SequentialQueue\\DeQueueEx\\dequeueEx.c",
+              "RelativeDocumentMoniker": "DeQueueEx\\dequeueEx.c",
+              "ToolTip": "G:\\\uAC15\uC131\uAD00 \uAD50\uC218\uB2D8 \uC54C\uACE0\uB9AC\uC998\\10\uC8FC\uCC28 \uAC15\uC758 \uB0B4\uC6A9\\SequentialQueue\\DeQueueEx\\dequeueEx.c",
+              "RelativeToolTip": "DeQueueEx\\dequeueEx.c",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAABwAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000423|",
+              "WhenOpened": "2026-05-06T03:52:54.748Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "LinkedQueue.c",
+              "DocumentMoniker": "G:\\\uAC15\uC131\uAD00 \uAD50\uC218\uB2D8 \uC54C\uACE0\uB9AC\uC998\\10\uC8FC\uCC28 \uAC15\uC758 \uB0B4\uC6A9\\SequentialQueue\\LinkedQueue\\LinkedQueue.c",
+              "RelativeDocumentMoniker": "LinkedQueue\\LinkedQueue.c",
+              "ToolTip": "G:\\\uAC15\uC131\uAD00 \uAD50\uC218\uB2D8 \uC54C\uACE0\uB9AC\uC998\\10\uC8FC\uCC28 \uAC15\uC758 \uB0B4\uC6A9\\SequentialQueue\\LinkedQueue\\LinkedQueue.c",
+              "RelativeToolTip": "LinkedQueue\\LinkedQueue.c",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAwwEgAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000423|",
+              "WhenOpened": "2026-05-05T21:21:08.699Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "LinkedQueue.h",
+              "DocumentMoniker": "G:\\\uAC15\uC131\uAD00 \uAD50\uC218\uB2D8 \uC54C\uACE0\uB9AC\uC998\\10\uC8FC\uCC28 \uAC15\uC758 \uB0B4\uC6A9\\SequentialQueue\\LinkedQueue\\LinkedQueue.h",
+              "RelativeDocumentMoniker": "LinkedQueue\\LinkedQueue.h",
+              "ToolTip": "G:\\\uAC15\uC131\uAD00 \uAD50\uC218\uB2D8 \uC54C\uACE0\uB9AC\uC998\\10\uC8FC\uCC28 \uAC15\uC758 \uB0B4\uC6A9\\SequentialQueue\\LinkedQueue\\LinkedQueue.h",
+              "RelativeToolTip": "LinkedQueue\\LinkedQueue.h",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAcAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-05-05T21:19:21.344Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "cQueueS.c",
+              "DocumentMoniker": "G:\\\uAC15\uC131\uAD00 \uAD50\uC218\uB2D8 \uC54C\uACE0\uB9AC\uC998\\10\uC8FC\uCC28 \uAC15\uC758 \uB0B4\uC6A9\\SequentialQueue\\CircularQueueSeq\\cQueueS.c",
+              "RelativeDocumentMoniker": "CircularQueueSeq\\cQueueS.c",
+              "ToolTip": "G:\\\uAC15\uC131\uAD00 \uAD50\uC218\uB2D8 \uC54C\uACE0\uB9AC\uC998\\10\uC8FC\uCC28 \uAC15\uC758 \uB0B4\uC6A9\\SequentialQueue\\CircularQueueSeq\\cQueueS.c",
+              "RelativeToolTip": "CircularQueueSeq\\cQueueS.c",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAaAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000423|",
+              "WhenOpened": "2026-05-05T21:14:37.699Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "cQueueS.h",
+              "DocumentMoniker": "G:\\\uAC15\uC131\uAD00 \uAD50\uC218\uB2D8 \uC54C\uACE0\uB9AC\uC998\\10\uC8FC\uCC28 \uAC15\uC758 \uB0B4\uC6A9\\SequentialQueue\\CircularQueueSeq\\cQueueS.h",
+              "RelativeDocumentMoniker": "CircularQueueSeq\\cQueueS.h",
+              "ToolTip": "G:\\\uAC15\uC131\uAD00 \uAD50\uC218\uB2D8 \uC54C\uACE0\uB9AC\uC998\\10\uC8FC\uCC28 \uAC15\uC758 \uB0B4\uC6A9\\SequentialQueue\\CircularQueueSeq\\cQueueS.h",
+              "RelativeToolTip": "CircularQueueSeq\\cQueueS.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAARAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-05-05T21:13:48.917Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "circularQueueSeq.c",
+              "DocumentMoniker": "G:\\\uAC15\uC131\uAD00 \uAD50\uC218\uB2D8 \uC54C\uACE0\uB9AC\uC998\\10\uC8FC\uCC28 \uAC15\uC758 \uB0B4\uC6A9\\SequentialQueue\\CircularQueueSeq\\circularQueueSeq.c",
+              "RelativeDocumentMoniker": "CircularQueueSeq\\circularQueueSeq.c",
+              "ToolTip": "G:\\\uAC15\uC131\uAD00 \uAD50\uC218\uB2D8 \uC54C\uACE0\uB9AC\uC998\\10\uC8FC\uCC28 \uAC15\uC758 \uB0B4\uC6A9\\SequentialQueue\\CircularQueueSeq\\circularQueueSeq.c",
+              "RelativeToolTip": "CircularQueueSeq\\circularQueueSeq.c",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000423|",
+              "WhenOpened": "2026-05-05T21:12:35.133Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "queueS.c",
+              "DocumentMoniker": "G:\\\uAC15\uC131\uAD00 \uAD50\uC218\uB2D8 \uC54C\uACE0\uB9AC\uC998\\10\uC8FC\uCC28 \uAC15\uC758 \uB0B4\uC6A9\\SequentialQueue\\SequentialQueue\\queueS.c",
+              "RelativeDocumentMoniker": "SequentialQueue\\queueS.c",
+              "ToolTip": "G:\\\uAC15\uC131\uAD00 \uAD50\uC218\uB2D8 \uC54C\uACE0\uB9AC\uC998\\10\uC8FC\uCC28 \uAC15\uC758 \uB0B4\uC6A9\\SequentialQueue\\SequentialQueue\\queueS.c",
+              "RelativeToolTip": "SequentialQueue\\queueS.c",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAdAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000423|",
+              "WhenOpened": "2026-05-05T21:07:48.685Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "queueS.h",
+              "DocumentMoniker": "G:\\\uAC15\uC131\uAD00 \uAD50\uC218\uB2D8 \uC54C\uACE0\uB9AC\uC998\\10\uC8FC\uCC28 \uAC15\uC758 \uB0B4\uC6A9\\SequentialQueue\\SequentialQueue\\queueS.h",
+              "RelativeDocumentMoniker": "SequentialQueue\\queueS.h",
+              "ToolTip": "G:\\\uAC15\uC131\uAD00 \uAD50\uC218\uB2D8 \uC54C\uACE0\uB9AC\uC998\\10\uC8FC\uCC28 \uAC15\uC758 \uB0B4\uC6A9\\SequentialQueue\\SequentialQueue\\queueS.h",
+              "RelativeToolTip": "SequentialQueue\\queueS.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAADwvwkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-05-05T21:06:54.136Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "sequentialQueue.c",
+              "DocumentMoniker": "G:\\\uAC15\uC131\uAD00 \uAD50\uC218\uB2D8 \uC54C\uACE0\uB9AC\uC998\\10\uC8FC\uCC28 \uAC15\uC758 \uB0B4\uC6A9\\SequentialQueue\\SequentialQueue\\sequentialQueue.c",
+              "RelativeDocumentMoniker": "SequentialQueue\\sequentialQueue.c",
+              "ToolTip": "G:\\\uAC15\uC131\uAD00 \uAD50\uC218\uB2D8 \uC54C\uACE0\uB9AC\uC998\\10\uC8FC\uCC28 \uAC15\uC758 \uB0B4\uC6A9\\SequentialQueue\\SequentialQueue\\sequentialQueue.c",
+              "RelativeToolTip": "SequentialQueue\\sequentialQueue.c",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000423|",
+              "WhenOpened": "2026-05-05T21:05:54.288Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
