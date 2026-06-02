@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Copyright (c) 2011, 2019 IBM Corporation and others.
+    This program and the accompanying materials
+    are made available under the terms of the Eclipse Public License 2.0
+    which accompanies this distribution, and is available at
+    https://www.eclipse.org/legal/epl-2.0/
+
+    SPDX-License-Identifier: EPL-2.0
+
+    Contributors:
+        IBM Corporation - initial API and implementation
+ -->
+
+<feature
+      id="org.eclipse.jpt.jpa.eclipselink.feature"
+      label="%featureName"
+      version="3.4.101.v202308172102"
+      provider-name="%providerName"
+      plugin="org.eclipse.jpt.jpa.eclipselink.branding">
+
+   <description>
+      %description
+   </description>
+
+   <copyright>
+      %copyright
+   </copyright>
+
+   <license url="%licenseURL">
+      %license
+   </license>
+
+   <requires>
+      <import feature="org.eclipse.jpt.jpa.feature" version="3.2.0"/>
+      <import feature="org.eclipse.jpt.common.eclipselink.feature" version="1.2.0"/>
+   </requires>
+
+   <plugin
+         id="org.eclipse.persistence.antlr"
+         version="3.5.2.v201711011707"/>
+
+   <plugin
+         id="org.eclipse.persistence.asm"
+         version="6.2.0.v201808041549"/>
+
+   <plugin
+         id="org.eclipse.persistence.core"
+         version="2.7.3.v20180807-4be1041"/>
+
+   <plugin
+         id="org.eclipse.persistence.jpa"
+         version="2.7.3.v20180807-4be1041"/>
+
+   <plugin
+         id="org.eclipse.jpt.jpa.eclipselink.core"
+         version="2.5.0.v202308172102"/>
+
+   <plugin
+         id="org.eclipse.jpt.jpa.eclipselink.ui"
+         version="2.4.101.v202301061019"/>
+
+   <plugin
+         id="org.eclipse.jpt.jpa.eclipselink.core.ddlgen"
+         version="2.2.201.v201902121834"/>
+
+   <plugin
+         id="org.eclipse.jpt.jpa.eclipselink.branding"
+         version="3.4.1.v201902121834"/>
+
+</feature>

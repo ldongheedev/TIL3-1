@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="org.eclipse.datatools.enablement.oracle.feature"
+      label="%featureName"
+      version="1.15.1.202412071309"
+      provider-name="%providerName"
+      plugin="org.eclipse.datatools.enablement.finfo">
+
+   <description>
+      %description
+   </description>
+
+   <copyright>
+      %featureCopyright
+   </copyright>
+
+   <license url="%licenseURL">
+      %license
+   </license>
+
+   <requires>
+      <import feature="org.eclipse.datatools.modelbase.feature" version="1.13.0" match="greaterOrEqual"/>
+      <import feature="org.eclipse.datatools.connectivity.feature" version="1.13.0" match="greaterOrEqual"/>
+      <import feature="org.eclipse.datatools.enablement.jdbc.feature" version="1.13.0" match="greaterOrEqual"/>
+   </requires>
+
+   <plugin
+         id="org.eclipse.datatools.enablement.oracle.dbdefinition"
+         version="1.3.0.202412071309"/>
+
+   <plugin
+         id="org.eclipse.datatools.enablement.oracle"
+         version="1.3.0.202311071249"/>
+
+   <plugin
+         id="org.eclipse.datatools.enablement.oracle.ui"
+         version="1.3.0.202311071249"/>
+
+   <plugin
+         id="org.eclipse.datatools.enablement.finfo"
+         version="1.8.0.202311071249"/>
+
+</feature>

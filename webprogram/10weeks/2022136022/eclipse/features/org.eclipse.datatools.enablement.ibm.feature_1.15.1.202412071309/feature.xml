@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="org.eclipse.datatools.enablement.ibm.feature"
+      label="%featureName"
+      version="1.15.1.202412071309"
+      provider-name="%providerName"
+      plugin="org.eclipse.datatools.enablement.ibm">
+
+   <description>
+      %description
+   </description>
+
+   <copyright>
+      %featureCopyright
+   </copyright>
+
+   <license url="%licenseURL">
+      %license
+   </license>
+
+   <requires>
+      <import feature="org.eclipse.datatools.modelbase.feature" version="1.13.0" match="greaterOrEqual"/>
+      <import feature="org.eclipse.datatools.connectivity.feature" version="1.13.0" match="greaterOrEqual"/>
+      <import feature="org.eclipse.datatools.enablement.jdbc.feature" version="1.13.0" match="greaterOrEqual"/>
+   </requires>
+
+   <plugin
+         id="org.eclipse.datatools.enablement.ibm"
+         version="1.3.0.202311071249"/>
+
+   <plugin
+         id="org.eclipse.datatools.enablement.ibm.db2"
+         version="1.3.0.202311071249"/>
+
+   <plugin
+         id="org.eclipse.datatools.enablement.ibm.db2.iseries.dbdefinition"
+         version="1.3.0.202311071249"/>
+
+   <plugin
+         id="org.eclipse.datatools.enablement.ibm.db2.iseries"
+         version="1.3.0.202311071249"/>
+
+   <plugin
+         id="org.eclipse.datatools.enablement.ibm.db2.iseries.ui"
+         version="1.3.0.202311071249"/>
+
+   <plugin
+         id="org.eclipse.datatools.enablement.ibm.db2.luw.dbdefinition"
+         version="1.3.0.202412071309"/>
+
+   <plugin
+         id="org.eclipse.datatools.enablement.ibm.db2.luw"
+         version="1.3.0.202311071249"/>
+
+   <plugin
+         id="org.eclipse.datatools.enablement.ibm.db2.luw.ui"
+         version="1.3.0.202311071249"/>
+
+   <plugin
+         id="org.eclipse.datatools.enablement.ibm.db2.zseries.dbdefinition"
+         version="1.3.0.202412071309"/>
+
+   <plugin
+         id="org.eclipse.datatools.enablement.ibm.db2.zseries"
+         version="1.3.0.202311071249"/>
+
+   <plugin
+         id="org.eclipse.datatools.enablement.ibm.db2.zseries.ui"
+         version="1.3.0.202311071249"/>
+
+   <plugin
+         id="org.eclipse.datatools.enablement.ibm.informix.dbdefinition"
+         version="1.3.0.202412071309"/>
+
+   <plugin
+         id="org.eclipse.datatools.enablement.ibm.informix"
+         version="1.3.0.202311071249"/>
+
+   <plugin
+         id="org.eclipse.datatools.enablement.ibm.informix.ui"
+         version="1.3.0.202311071249"/>
+
+   <plugin
+         id="org.eclipse.datatools.enablement.ibm.ui"
+         version="1.3.0.202311071249"/>
+
+</feature>

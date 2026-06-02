@@ -1,0 +1,12 @@
+2026-04-17 11:53:31.124545+09:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "SELECT b_bookId, b_name, b_unitPrice, b_author, b_description, b_publisher, b_category, b_unitsInStock, b_releaseDate, b_condition FROM book where b_categoryLIKE [*]'%' || ? || '%'"; SQL statement:
+SELECT b_bookId, b_name, b_unitPrice, b_author, b_description, b_publisher, b_category, b_unitsInStock, b_releaseDate, b_condition FROM book where b_categoryLIKE '%' || ? || '%' [42000-240]
+2026-04-17 11:54:19.511913+09:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "SELECT b_bookId, b_name, b_unitPrice, b_author, b_description, b_publisher, b_category, b_unitsInStock, b_releaseDate, b_condition FROM book where b_categoryLIKE [*]'%' || ? || '%'"; SQL statement:
+SELECT b_bookId, b_name, b_unitPrice, b_author, b_description, b_publisher, b_category, b_unitsInStock, b_releaseDate, b_condition FROM book where b_categoryLIKE '%' || ? || '%' [42000-240]
+2026-04-17 11:54:20.126160+09:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "SELECT b_bookId, b_name, b_unitPrice, b_author, b_description, b_publisher, b_category, b_unitsInStock, b_releaseDate, b_condition FROM book where b_categoryLIKE [*]'%' || ? || '%'"; SQL statement:
+SELECT b_bookId, b_name, b_unitPrice, b_author, b_description, b_publisher, b_category, b_unitsInStock, b_releaseDate, b_condition FROM book where b_categoryLIKE '%' || ? || '%' [42000-240]
+2026-04-17 11:54:20.330360+09:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "SELECT b_bookId, b_name, b_unitPrice, b_author, b_description, b_publisher, b_category, b_unitsInStock, b_releaseDate, b_condition FROM book where b_categoryLIKE [*]'%' || ? || '%'"; SQL statement:
+SELECT b_bookId, b_name, b_unitPrice, b_author, b_description, b_publisher, b_category, b_unitsInStock, b_releaseDate, b_condition FROM book where b_categoryLIKE '%' || ? || '%' [42000-240]

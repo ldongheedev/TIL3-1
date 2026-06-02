@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="org.eclipse.jst.ws.axis2tools.feature"
+      label="%featureName"
+      version="1.2.0.v202405180419"
+      provider-name="%providerName"
+      plugin="org.eclipse.jst.ws.axis2.ui">
+
+   <description>
+      %description
+   </description>
+
+   <copyright>
+      %feature.copyright
+   </copyright>
+
+   <license url="%licenseURL">
+      %license
+   </license>
+
+   <plugin
+         id="org.eclipse.jst.ws.axis2.core"
+         version="1.1.100.v202405180419"/>
+
+   <plugin
+         id="org.eclipse.jst.ws.axis2.ui"
+         version="1.1.0.v202308010145"/>
+
+   <plugin
+         id="org.eclipse.jst.ws.axis2.consumption.core"
+         version="1.1.0.v202308010354"/>
+
+   <plugin
+         id="org.eclipse.jst.ws.axis2.consumption.ui"
+         version="1.1.0.v202308010145"/>
+
+   <plugin
+         id="org.eclipse.jst.ws.axis2.creation.core"
+         version="1.1.0.v202308010145"/>
+
+   <plugin
+         id="org.eclipse.jst.ws.axis2.creation.ui"
+         version="1.1.0.v202308010145"/>
+
+   <plugin
+         id="org.eclipse.jst.ws.axis2.ui.doc.user"
+         version="1.0.200.v201903222115"/>
+
+</feature>

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Copyright (c) 2010, 2019 IBM Corporation and others.
+    This program and the accompanying materials
+    are made available under the terms of the Eclipse Public License 2.0
+    which accompanies this distribution, and is available at
+    https://www.eclipse.org/legal/epl-2.0/
+
+    SPDX-License-Identifier: EPL-2.0
+
+    Contributors:
+        IBM Corporation - initial API and implementation
+ -->
+<feature
+      id="org.eclipse.jsf.feature"
+      label="%name"
+      version="3.14.0.v202504070144"
+      provider-name="%provider"
+      image="eclipse_update_120.jpg">
+
+   <description>
+      %description
+   </description>
+
+   <copyright>
+      %copyright
+   </copyright>
+
+   <license url="%licenseURL">
+      %license
+   </license>
+
+   <plugin
+         id="org.eclipse.jst.jsf.common"
+         version="1.6.0.v202504061844"/>
+
+   <plugin
+         id="org.eclipse.jst.jsf.common.runtime"
+         version="1.5.0.v202303190717"/>
+
+   <plugin
+         id="org.eclipse.jst.jsf.common.ui"
+         version="1.7.0.v202303190717"/>
+
+   <plugin
+         id="org.eclipse.jst.jsf.core"
+         version="1.9.3.v202504061844"/>
+
+   <plugin
+         id="org.eclipse.jst.jsf.facelet.core"
+         version="1.5.0.v202308300413"/>
+
+   <plugin
+         id="org.eclipse.jst.jsf.facelet.ui"
+         version="1.5.0.v202308300413"/>
+
+   <plugin
+         id="org.eclipse.jst.jsf.facesconfig"
+         version="1.6.0.v202303190717"/>
+
+   <plugin
+         id="org.eclipse.jst.jsf.facesconfig.ui"
+         version="1.7.1.v202502282010"/>
+
+   <plugin
+         id="org.eclipse.jst.jsf.ui"
+         version="1.7.0.v202303190717"/>
+
+   <plugin
+         id="org.eclipse.jst.jsf.standard.tagsupport"
+         version="1.6.0.v202303190717"/>
+
+   <plugin
+         id="org.eclipse.jsf.branding"
+         version="3.5.1.v201902121810"/>
+
+</feature>

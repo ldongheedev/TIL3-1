@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="org.eclipse.datatools.sqldevtools.data.feature"
+      label="%featureName"
+      version="1.15.1.202412071309"
+      provider-name="%providerName">
+
+   <description>
+      %description
+   </description>
+
+   <copyright>
+      %featureCopyright
+   </copyright>
+
+   <license url="%licenseURL">
+      %license
+   </license>
+
+   <requires>
+      <import feature="org.eclipse.datatools.modelbase.feature" version="1.13.0" match="greaterOrEqual"/>
+      <import feature="org.eclipse.datatools.connectivity.feature" version="1.13.0" match="greaterOrEqual"/>
+      <import feature="org.eclipse.datatools.sqldevtools.ddl.feature" version="1.13.0" match="greaterOrEqual"/>
+   </requires>
+
+   <plugin
+         id="org.eclipse.datatools.sqltools.data.core"
+         version="1.5.0.202311071249"/>
+
+   <plugin
+         id="org.eclipse.datatools.sqltools.data.ui"
+         version="1.5.0.202311071249"/>
+
+   <plugin
+         id="org.eclipse.datatools.sqltools.tabledataeditor"
+         version="1.3.0.202311071249"/>
+
+   <plugin
+         id="org.eclipse.datatools.sqltools.result.ui"
+         version="1.4.0.202311071249"/>
+
+   <plugin
+         id="org.eclipse.datatools.sqltools.common.ui"
+         version="1.3.0.202412071309"/>
+
+</feature>

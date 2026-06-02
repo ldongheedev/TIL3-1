@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="org.eclipse.datatools.enablement.sybase.feature"
+      label="%featureName"
+      version="1.15.1.202412071309"
+      provider-name="%providerName"
+      plugin="org.eclipse.datatools.enablement.sybase">
+
+   <description>
+      %description
+   </description>
+
+   <copyright>
+      %featureCopyright
+   </copyright>
+
+   <license url="%licenseURL">
+      %license
+   </license>
+
+   <requires>
+      <import feature="org.eclipse.datatools.modelbase.feature" version="1.13.0" match="greaterOrEqual"/>
+      <import feature="org.eclipse.datatools.connectivity.feature" version="1.13.0" match="greaterOrEqual"/>
+      <import feature="org.eclipse.datatools.sqldevtools.feature" version="1.13.0" match="greaterOrEqual"/>
+      <import feature="org.eclipse.datatools.enablement.jdbc.feature" version="1.13.0" match="greaterOrEqual"/>
+   </requires>
+
+   <plugin
+         id="org.eclipse.datatools.enablement.sybase.asa.models"
+         version="1.3.0.202311071249"/>
+
+   <plugin
+         id="org.eclipse.datatools.enablement.sybase.ase.models"
+         version="1.3.0.202311071249"/>
+
+   <plugin
+         id="org.eclipse.datatools.enablement.sybase.asa"
+         version="1.3.0.202311071249"/>
+
+   <plugin
+         id="org.eclipse.datatools.enablement.sybase.ase"
+         version="1.3.0.202311071249"/>
+
+   <plugin
+         id="org.eclipse.datatools.enablement.sybase.ase.dbdefinition"
+         version="1.3.0.202412071309"/>
+
+   <plugin
+         id="org.eclipse.datatools.enablement.sybase.asa.dbdefinition"
+         version="1.3.0.202311071249"/>
+
+   <plugin
+         id="org.eclipse.datatools.enablement.sybase.asa.ui"
+         version="1.3.0.202311071249"/>
+
+   <plugin
+         id="org.eclipse.datatools.enablement.sybase.ase.ui"
+         version="1.3.0.202311071249"/>
+
+   <plugin
+         id="org.eclipse.datatools.enablement.sybase"
+         version="1.3.0.202311071249"/>
+
+   <plugin
+         id="org.eclipse.datatools.enablement.sybase.models"
+         version="1.3.0.202311071249"/>
+
+   <plugin
+         id="org.eclipse.datatools.enablement.sybase.ui"
+         version="1.3.0.202412071309"/>
+
+   <plugin
+         id="org.eclipse.datatools.enablement.sybase.asa.schemaobjecteditor.examples"
+         version="2.8.0.202311071249"/>
+
+</feature>

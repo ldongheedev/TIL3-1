@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="org.eclipse.jst.ws.cxf.feature"
+      label="%featureName"
+      version="1.1.1500.v202511232201"
+      provider-name="%featureProvider"
+      plugin="org.eclipse.jst.ws.cxf.core"
+      image="eclipse_update_120.jpg">
+
+   <description>
+      %description
+   </description>
+
+   <copyright>
+      %copyright
+   </copyright>
+
+   <license url="%licenseURL">
+      %license
+   </license>
+
+   <requires>
+      <import feature="org.eclipse.jst.ws.jaxws_userdoc.feature"/>
+   </requires>
+
+   <plugin
+         id="org.jdom"
+         version="1.1.3.v20230812-1600"/>
+
+   <plugin
+         id="org.eclipse.jst.ws.cxf.consumption.core"
+         version="1.1.0.v202308010145"/>
+
+   <plugin
+         id="org.eclipse.jst.ws.cxf.consumption.ui"
+         version="1.1.0.v202308010229"/>
+
+   <plugin
+         id="org.eclipse.jst.ws.cxf.core"
+         version="1.2.0.v202308010145"/>
+
+   <plugin
+         id="org.eclipse.jst.ws.cxf.creation.core"
+         version="1.2.0.v202311232240"/>
+
+   <plugin
+         id="org.eclipse.jst.ws.cxf.creation.ui"
+         version="1.1.0.v202308010145"/>
+
+   <plugin
+         id="org.eclipse.jst.ws.cxf.ui"
+         version="1.1.0.v202308010145"/>
+
+   <plugin
+         id="javax.wsdl"
+         version="1.6.2.v201012040545"/>
+
+   <plugin
+         id="javax.jws"
+         version="2.0.0.v201005080400"/>
+
+   <plugin
+         id="jakarta.xml.bind-api"
+         version="2.3.3"/>
+
+   <plugin
+         id="javax.xml.ws"
+         version="2.1.0.v200902101523"/>
+
+</feature>
