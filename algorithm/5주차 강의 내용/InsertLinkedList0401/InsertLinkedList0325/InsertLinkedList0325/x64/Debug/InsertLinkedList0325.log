@@ -1,0 +1,3 @@
+﻿  insertLinkedMain.c
+C:\AlgorithmB\Project\InsertLinkedList0401\InsertLinkedList0325\InsertLinkedList0325\insertLinkedMain.c(34,22): warning C4133: '함수': 'char [4]'과(와) 'listNode *' 사이의 형식이 호환되지 않습니다.
+C:\AlgorithmB\Project\InsertLinkedList0401\InsertLinkedList0325\InsertLinkedList0325\insertLinkedMain.c(34,2): error C2198: 'void insertMiddleNode(linkedList_h *,listNode *,const char *)': 호출에 인수가 너무 적습니다.
